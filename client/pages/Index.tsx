@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -63,22 +64,48 @@ export default function Index() {
         <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 lg:py-32">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             {/* Content */}
-            <div className="text-center lg:text-left">
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8 }}
+              className="text-center lg:text-left"
+            >
               <div className="mb-6">
-                <Badge variant="secondary" className="mb-4">
-                  Available for Opportunities
-                </Badge>
-                <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-foreground mb-6">
+                <motion.div
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ delay: 0.2, duration: 0.5 }}
+                >
+                  <Badge variant="secondary" className="mb-4">
+                    Available for Opportunities
+                  </Badge>
+                </motion.div>
+                <motion.h1
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.3, duration: 0.8 }}
+                  className="text-4xl sm:text-5xl lg:text-6xl font-bold text-foreground mb-6"
+                >
                   Hi, I'm <span className="text-primary">Naveen Vemula</span>
-                </h1>
-                <p className="text-xl text-muted-foreground mb-8 max-w-2xl">
+                </motion.h1>
+                <motion.p
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.4, duration: 0.8 }}
+                  className="text-xl text-muted-foreground mb-8 max-w-2xl"
+                >
                   AI-Powered Full-Stack Developer specializing in Java, Spring
                   Boot, Angular, and AWS. Building enterprise-grade applications
                   with cutting-edge AI integrations.
-                </p>
+                </motion.p>
               </div>
 
-              <div className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start mb-8">
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.5, duration: 0.8 }}
+                className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start mb-8"
+              >
                 <Button size="lg" asChild>
                   <a href="/resume.pdf" download>
                     View Resume
@@ -91,9 +118,14 @@ export default function Index() {
                     <MailIcon className="ml-2 h-4 w-4" />
                   </Link>
                 </Button>
-              </div>
+              </motion.div>
 
-              <div className="flex justify-center lg:justify-start space-x-4">
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.6, duration: 0.8 }}
+                className="flex justify-center lg:justify-start space-x-4"
+              >
                 <Button variant="ghost" size="sm" asChild>
                   <a
                     href="https://www.linkedin.com/in/naveen-vemula"
@@ -117,26 +149,58 @@ export default function Index() {
                     <MailIcon className="h-5 w-5" />
                   </a>
                 </Button>
-              </div>
-            </div>
+              </motion.div>
+            </motion.div>
 
             {/* Avatar/Image */}
-            <div className="flex justify-center lg:justify-end">
+            <motion.div
+              initial={{ opacity: 0, scale: 0.8 }}
+              animate={{ opacity: 1, scale: 1 }}
+              transition={{ delay: 0.4, duration: 0.8 }}
+              className="flex justify-center lg:justify-end"
+            >
               <div className="relative">
-                <div className="w-80 h-80 rounded-full bg-gradient-to-br from-primary-400 to-primary-600 p-1">
+                <motion.div
+                  whileHover={{ scale: 1.05 }}
+                  transition={{ type: "spring", stiffness: 300 }}
+                  className="w-80 h-80 rounded-full bg-gradient-to-br from-primary-400 to-primary-600 p-1"
+                >
                   <div className="w-full h-full rounded-full bg-background flex items-center justify-center text-6xl font-bold text-primary">
                     NV
                   </div>
-                </div>
+                </motion.div>
                 {/* Floating elements */}
-                <div className="absolute -top-4 -right-4 w-16 h-16 bg-primary-100 dark:bg-primary-900 rounded-full flex items-center justify-center animate-bounce">
+                <motion.div
+                  animate={{
+                    y: [-10, 10, -10],
+                    rotate: [0, 5, -5, 0],
+                  }}
+                  transition={{
+                    duration: 3,
+                    repeat: Infinity,
+                    ease: "easeInOut",
+                  }}
+                  className="absolute -top-4 -right-4 w-16 h-16 bg-primary-100 dark:bg-primary-900 rounded-full flex items-center justify-center"
+                >
                   <span className="text-2xl">⚡</span>
-                </div>
-                <div className="absolute -bottom-4 -left-4 w-12 h-12 bg-primary-200 dark:bg-primary-800 rounded-full flex items-center justify-center animate-pulse">
+                </motion.div>
+                <motion.div
+                  animate={{
+                    y: [10, -10, 10],
+                    rotate: [0, -5, 5, 0],
+                  }}
+                  transition={{
+                    duration: 4,
+                    repeat: Infinity,
+                    ease: "easeInOut",
+                    delay: 0.5,
+                  }}
+                  className="absolute -bottom-4 -left-4 w-12 h-12 bg-primary-200 dark:bg-primary-800 rounded-full flex items-center justify-center"
+                >
                   <span className="text-lg">🚀</span>
-                </div>
+                </motion.div>
               </div>
-            </div>
+            </motion.div>
           </div>
         </div>
       </section>
