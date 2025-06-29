@@ -94,14 +94,15 @@ export default function About() {
                 I am <strong className="text-foreground">Naveen Vemula</strong>,
                 a full-stack software engineer with expertise in building
                 AI-powered, cloud-hosted, enterprise-grade applications. My tech
-                stack spans Java, Spring Boot, Angular, and AWS services.
+                stack spans Python, React, Java, Spring Boot, Angular, and AWS
+                services.
               </p>
               <p className="text-lg leading-relaxed text-muted-foreground">
                 I'm passionate about solving real-world problems using scalable
-                microservices, intelligent UI/UX, and AI integrations. With
-                experience at Software AG and recognition in hackathons like
-                HackMidwest 2024, I bring both technical depth and innovation to
-                every project.
+                microservices, intelligent UI/UX, and AI integrations. From
+                Python-based AI/ML solutions to modern React applications, I
+                bring both technical depth and innovation to every project, with
+                recognition in hackathons like HackMidwest 2024.
               </p>
             </CardContent>
           </Card>

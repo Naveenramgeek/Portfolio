@@ -26,8 +26,8 @@ export default function Skills() {
             <CardContent>
               <div className="flex flex-wrap gap-2">
                 {[
-                  "Java",
                   "Python",
+                  "Java",
                   "TypeScript",
                   "JavaScript",
                   "SQL",
@@ -46,21 +46,22 @@ export default function Skills() {
           <Card className="hover:shadow-lg transition-shadow">
             <CardHeader>
               <CardTitle className="text-xl text-primary flex items-center">
-                <span className="text-2xl mr-3">��️</span>
+                <span className="text-2xl mr-3">🛠️</span>
                 Frameworks & Libraries
               </CardTitle>
             </CardHeader>
             <CardContent>
               <div className="flex flex-wrap gap-2">
                 {[
+                  "React",
                   "Spring Boot",
                   "Spring Security",
                   "Angular",
                   "RxJS",
                   "NgRx",
-                  "React",
-                  "AG Grid",
                   "Node.js",
+                  "FastAPI",
+                  "Flask",
                 ].map((skill) => (
                   <Badge key={skill} variant="secondary">
                     {skill}
@@ -79,7 +80,16 @@ export default function Skills() {
             </CardHeader>
             <CardContent>
               <div className="flex flex-wrap gap-2">
-                {["OpenAI API", "LIME", "GradCAM"].map((skill) => (
+                {[
+                  "OpenAI API",
+                  "TensorFlow",
+                  "PyTorch",
+                  "Scikit-learn",
+                  "Pandas",
+                  "NumPy",
+                  "LIME",
+                  "GradCAM",
+                ].map((skill) => (
                   <Badge key={skill} variant="secondary">
                     {skill}
                   </Badge>
