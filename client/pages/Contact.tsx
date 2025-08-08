@@ -43,23 +43,45 @@ export default function Contact() {
     // Prevent double submission
     if (isLoading) return;
 
+    // Validate required fields
+    if (!formData.firstName.trim() || !formData.lastName.trim() || !formData.email.trim() || !formData.message.trim()) {
+      toast({
+        title: "Please fill all required fields",
+        description: "Name, email, and message are required.",
+        variant: "destructive",
+      });
+      return;
+    }
+
     setIsLoading(true);
 
+    // Add delay to prevent rapid submissions
+    await new Promise(resolve => setTimeout(resolve, 300));
+
     try {
-      // Use Web3Forms - reliable free email service
-      const formDataToSend = new FormData();
-      formDataToSend.append('access_key', 'a6bb2d13-b5be-4c6b-a6dd-4fce5c64a76b'); // Free public key for testing
-      formDataToSend.append('name', `${formData.firstName} ${formData.lastName}`);
-      formDataToSend.append('email', formData.email);
-      formDataToSend.append('subject', formData.subject);
-      formDataToSend.append('message', formData.message);
-      formDataToSend.append('to_email', 'naveenvemula2487@gmail.com');
-      formDataToSend.append('from_name', 'Portfolio Contact Form');
+      // Use simple JSON approach to avoid FormData stream issues
+      const emailData = {
+        access_key: 'a6bb2d13-b5be-4c6b-a6dd-4fce5c64a76b',
+        name: `${formData.firstName} ${formData.lastName}`.trim(),
+        email: formData.email,
+        subject: formData.subject,
+        message: formData.message,
+        to_email: 'naveenvemula2487@gmail.com',
+        from_name: 'Portfolio Contact Form'
+      };
 
       const response = await fetch('https://api.web3forms.com/submit', {
         method: 'POST',
-        body: formDataToSend
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        body: JSON.stringify(emailData)
       });
+
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
 
       const result = await response.json();
 
