@@ -237,12 +237,6 @@ export default function Contact() {
                   type="submit"
                   className="w-full"
                   disabled={isLoading}
-                  onClick={(e) => {
-                    if (isLoading) {
-                      e.preventDefault();
-                      return false;
-                    }
-                  }}
                 >
                   {isLoading ? (
                     <>
