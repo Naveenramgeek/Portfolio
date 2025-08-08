@@ -1,5 +1,4 @@
-import { useState, useEffect } from "react";
-import emailjs from "@emailjs/browser";
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -28,11 +27,7 @@ export default function Contact() {
     message: "",
   });
 
-  // Initialize EmailJS when component mounts
-  useEffect(() => {
-    // Initialize EmailJS with public key
-    emailjs.init("dNx-wcyY5OZgUPBqw"); // Working public key for testing
-  }, []);
+
 
   const handleInputChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -66,38 +61,39 @@ export default function Contact() {
     await new Promise(resolve => setTimeout(resolve, 300));
 
     try {
-      // Send email automatically using EmailJS
-      const templateParams = {
-        from_name: `${formData.firstName} ${formData.lastName}`.trim(),
-        from_email: formData.email,
-        subject: formData.subject,
-        message: formData.message,
-        to_email: 'naveenvemula2487@gmail.com',
-      };
+      // Use FormSubmit for automatic email delivery
+      const formDataToSend = new FormData();
+      formDataToSend.append('name', `${formData.firstName} ${formData.lastName}`.trim());
+      formDataToSend.append('email', formData.email);
+      formDataToSend.append('subject', formData.subject);
+      formDataToSend.append('message', formData.message);
+      formDataToSend.append('_next', window.location.href); // Redirect back to same page
+      formDataToSend.append('_captcha', 'false'); // Disable captcha for smooth UX
 
-      // Send email using EmailJS with working configuration
-      const result = await emailjs.send(
-        'service_w48ldib', // Working service ID
-        'template_8fzwgmr', // Working template ID
-        templateParams
-      );
-
-      console.log('Email sent successfully:', result);
-
-      // Show success message
-      toast({
-        title: "Message sent successfully!",
-        description: "Thank you for your message. I'll get back to you within 24 hours.",
+      // Send to FormSubmit endpoint
+      const response = await fetch('https://formsubmit.co/naveenvemula2487@gmail.com', {
+        method: 'POST',
+        body: formDataToSend
       });
 
-      // Reset form
-      setFormData({
-        firstName: "",
-        lastName: "",
-        email: "",
-        subject: "",
-        message: "",
-      });
+      if (response.ok) {
+        // Show success message
+        toast({
+          title: "Message sent successfully!",
+          description: "Thank you for your message. I'll get back to you within 24 hours.",
+        });
+
+        // Reset form
+        setFormData({
+          firstName: "",
+          lastName: "",
+          email: "",
+          subject: "",
+          message: "",
+        });
+      } else {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
 
     } catch (error) {
       console.error("Email send error:", error);
