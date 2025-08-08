@@ -165,8 +165,12 @@ export default function Index() {
                   transition={{ type: "spring", stiffness: 300 }}
                   className="w-80 h-80 rounded-full bg-gradient-to-br from-primary-400 to-primary-600 p-1"
                 >
-                  <div className="w-full h-full rounded-full bg-background flex items-center justify-center text-6xl font-bold text-primary">
-                    NV
+                  <div className="w-full h-full rounded-full overflow-hidden">
+                    <img
+                      src="https://cdn.builder.io/api/v1/image/assets%2Fa8a5781317f94848a46c886177848c18%2F43797c565fd143f4b2ce1122a92ff3e3?format=webp&width=800"
+                      alt="Naveen Vemula - AI-Powered Full-Stack Developer"
+                      className="w-full h-full object-cover"
+                    />
                   </div>
                 </motion.div>
                 {/* Floating elements */}
