@@ -59,33 +59,22 @@ export default function Contact() {
     await new Promise(resolve => setTimeout(resolve, 300));
 
     try {
-      // Use simple JSON approach to avoid FormData stream issues
-      const emailData = {
-        access_key: 'a6bb2d13-b5be-4c6b-a6dd-4fce5c64a76b',
-        name: `${formData.firstName} ${formData.lastName}`.trim(),
-        email: formData.email,
-        subject: formData.subject,
-        message: formData.message,
-        to_email: 'naveenvemula2487@gmail.com',
-        from_name: 'Portfolio Contact Form'
-      };
+      // Use Netlify Forms approach - works automatically when deployed
+      const formDataToSend = new FormData();
+      formDataToSend.append('form-name', 'contact');
+      formDataToSend.append('name', `${formData.firstName} ${formData.lastName}`.trim());
+      formDataToSend.append('email', formData.email);
+      formDataToSend.append('subject', formData.subject);
+      formDataToSend.append('message', formData.message);
 
-      const response = await fetch('https://api.web3forms.com/submit', {
+      // Try Netlify Forms submission first
+      const response = await fetch('/', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          'Accept': 'application/json'
-        },
-        body: JSON.stringify(emailData)
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: new URLSearchParams(formDataToSend).toString()
       });
 
-      if (!response.ok) {
-        throw new Error(`HTTP error! status: ${response.status}`);
-      }
-
-      const result = await response.json();
-
-      if (result.success) {
+      if (response.ok) {
         toast({
           title: "Message sent successfully!",
           description: "Thank you for your message. I'll get back to you within 24 hours.",
@@ -100,7 +89,7 @@ export default function Contact() {
           message: "",
         });
       } else {
-        throw new Error(result.message || 'Failed to send message');
+        throw new Error(`HTTP error! status: ${response.status}`);
       }
     } catch (error) {
       console.error("Email send error:", error);
@@ -166,7 +155,22 @@ export default function Contact() {
               </CardTitle>
             </CardHeader>
             <CardContent>
-              <form onSubmit={handleSubmit} className="space-y-6" noValidate>
+              <form
+                onSubmit={handleSubmit}
+                className="space-y-6"
+                noValidate
+                name="contact"
+                data-netlify="true"
+                data-netlify-honeypot="bot-field"
+              >
+                {/* Hidden field for Netlify Forms */}
+                <input type="hidden" name="form-name" value="contact" />
+                {/* Honeypot field for spam protection */}
+                <div style={{ display: 'none' }}>
+                  <label>
+                    Don't fill this out if you're human: <input name="bot-field" />
+                  </label>
+                </div>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div className="space-y-2">
                     <Label htmlFor="firstName">First Name</Label>
