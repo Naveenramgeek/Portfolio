@@ -102,41 +102,21 @@ export default function Contact() {
     } catch (error) {
       console.error("Email send error:", error);
 
-      // Fallback: Use mailto link
-      try {
-        const mailtoLink = `mailto:naveenvemula2487@gmail.com?subject=${encodeURIComponent(
-          formData.subject || "Contact Form Message"
-        )}&body=${encodeURIComponent(
-          `Name: ${formData.firstName} ${formData.lastName}\n` +
-          `Email: ${formData.email}\n` +
-          `Subject: ${formData.subject}\n\n` +
-          `Message:\n${formData.message}\n\n` +
-          `---\nSent from portfolio contact form`
-        )}`;
+      // Show error message but still reset form
+      toast({
+        title: "Failed to send message",
+        description: "Please try again or contact me directly at naveenvemula2487@gmail.com",
+        variant: "destructive",
+      });
 
-        window.location.href = mailtoLink;
-
-        toast({
-          title: "Email service unavailable",
-          description: "Opening email client as fallback. Please send the pre-filled email.",
-        });
-
-        // Reset form
-        setFormData({
-          firstName: "",
-          lastName: "",
-          email: "",
-          subject: "",
-          message: "",
-        });
-      } catch (fallbackError) {
-        console.error("Fallback error:", fallbackError);
-        toast({
-          title: "Failed to send message",
-          description: "Please contact me directly at naveenvemula2487@gmail.com",
-          variant: "destructive",
-        });
-      }
+      // Reset form even on error so user can try again
+      setFormData({
+        firstName: "",
+        lastName: "",
+        email: "",
+        subject: "",
+        message: "",
+      });
     } finally {
       setIsLoading(false);
     }
