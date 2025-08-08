@@ -45,28 +45,62 @@ export default function Contact() {
 
     setIsLoading(true);
 
+    // Check if Formspree is configured
+    const formspreeId = 'YOUR_FORM_ID';
+    const isFormspreeConfigured = formspreeId !== 'YOUR_FORM_ID';
+
     try {
-      // Prepare form data for Formspree
-      const formDataToSend = new FormData();
-      formDataToSend.append('name', `${formData.firstName} ${formData.lastName}`);
-      formDataToSend.append('email', formData.email);
-      formDataToSend.append('subject', formData.subject);
-      formDataToSend.append('message', formData.message);
-      formDataToSend.append('_replyto', formData.email);
+      if (isFormspreeConfigured) {
+        // Use Formspree if configured
+        const formDataToSend = new FormData();
+        formDataToSend.append('name', `${formData.firstName} ${formData.lastName}`);
+        formDataToSend.append('email', formData.email);
+        formDataToSend.append('subject', formData.subject);
+        formDataToSend.append('message', formData.message);
+        formDataToSend.append('_replyto', formData.email);
 
-      // Send to Formspree
-      const response = await fetch('https://formspree.io/f/YOUR_FORM_ID', {
-        method: 'POST',
-        body: formDataToSend,
-        headers: {
-          'Accept': 'application/json'
+        const response = await fetch(`https://formspree.io/f/${formspreeId}`, {
+          method: 'POST',
+          body: formDataToSend,
+          headers: {
+            'Accept': 'application/json'
+          }
+        });
+
+        if (response.ok) {
+          toast({
+            title: "Message sent successfully!",
+            description: "Thank you for your message. I'll get back to you within 24 hours.",
+          });
+
+          // Reset form
+          setFormData({
+            firstName: "",
+            lastName: "",
+            email: "",
+            subject: "",
+            message: "",
+          });
+        } else {
+          throw new Error(`HTTP error! status: ${response.status}`);
         }
-      });
+      } else {
+        // Fallback: Use mailto link
+        const mailtoLink = `mailto:naveenvemula2487@gmail.com?subject=${encodeURIComponent(
+          formData.subject || "Contact Form Message"
+        )}&body=${encodeURIComponent(
+          `Name: ${formData.firstName} ${formData.lastName}\n` +
+          `Email: ${formData.email}\n` +
+          `Subject: ${formData.subject}\n\n` +
+          `Message:\n${formData.message}\n\n` +
+          `---\nSent from portfolio contact form`
+        )}`;
 
-      if (response.ok) {
+        window.location.href = mailtoLink;
+
         toast({
-          title: "Message sent successfully!",
-          description: "Thank you for your message. I'll get back to you within 24 hours.",
+          title: "Email client opened",
+          description: "Formspree not configured yet. Please send the pre-filled email manually.",
         });
 
         // Reset form
@@ -77,17 +111,23 @@ export default function Contact() {
           subject: "",
           message: "",
         });
-      } else {
-        throw new Error(`HTTP error! status: ${response.status}`);
       }
     } catch (error) {
       console.error("Email send error:", error);
 
-      toast({
-        title: "Failed to send message",
-        description: "Please try again or contact me directly at naveenvemula2487@gmail.com",
-        variant: "destructive",
-      });
+      if (error instanceof Error && error.message.includes('404')) {
+        toast({
+          title: "Formspree Not Configured",
+          description: "Please follow the setup guide in FORMSPREE_SETUP.md to enable automatic emails.",
+          variant: "destructive",
+        });
+      } else {
+        toast({
+          title: "Failed to send message",
+          description: "Please contact me directly at naveenvemula2487@gmail.com",
+          variant: "destructive",
+        });
+      }
     } finally {
       setIsLoading(false);
     }
@@ -206,7 +246,18 @@ export default function Contact() {
                 </Button>
                 <div className="text-center space-y-3">
                   <p className="text-sm text-muted-foreground">
-                    Your message will be sent directly to my inbox. I'll respond within 24 hours.
+                    {/* Show different message based on Formspree configuration */}
+                    {'YOUR_FORM_ID' === 'YOUR_FORM_ID' ? (
+                      <>
+                        <span className="inline-block w-2 h-2 bg-yellow-500 rounded-full mr-2"></span>
+                        Currently using email client. Follow FORMSPREE_SETUP.md for automatic delivery.
+                      </>
+                    ) : (
+                      <>
+                        <span className="inline-block w-2 h-2 bg-green-500 rounded-full mr-2"></span>
+                        Your message will be sent directly to my inbox. I'll respond within 24 hours.
+                      </>
+                    )}
                   </p>
                   <div className="flex flex-col sm:flex-row gap-2">
                     <Button
