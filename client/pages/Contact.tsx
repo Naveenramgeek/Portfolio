@@ -211,9 +211,24 @@ export default function Contact() {
                     </>
                   )}
                 </Button>
-                <p className="text-sm text-muted-foreground text-center">
-                  Your message will be sent directly to my email. I'll respond within 24 hours.
-                </p>
+                <div className="text-center space-y-3">
+                  <p className="text-sm text-muted-foreground">
+                    This will open your email client with a pre-filled message.
+                  </p>
+                  <div className="flex flex-col sm:flex-row gap-2">
+                    <Button
+                      type="button"
+                      variant="outline"
+                      className="flex-1"
+                      asChild
+                    >
+                      <a href="mailto:naveenvemula2487@gmail.com">
+                        <MailIcon className="mr-2 h-4 w-4" />
+                        Send Direct Email
+                      </a>
+                    </Button>
+                  </div>
+                </div>
               </form>
             </CardContent>
           </Card>
