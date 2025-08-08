@@ -10,6 +10,7 @@ export default function Projects() {
       description:
         "Full-stack app generating brand-specific ads using AI. Integrated Firebase for auth, OpenAI for ad generation, deployed via AWS EC2 and S3.",
       tech: ["Angular", "Spring Boot", "MongoDB", "OpenAI", "Firebase", "AWS"],
+      githubUrl: "https://github.com/Naveenramgeek/ai-ad-generator",
       featured: true,
     },
     {
@@ -17,6 +18,7 @@ export default function Projects() {
       description:
         "Real-time collaborative coding platform with integrated video/audio using Zoom SDK. Addressed SSR-related integration issues.",
       tech: ["Angular", "Node.js", "Zoom Video SDK"],
+      githubUrl: "https://github.com/Naveenramgeek/lets-code",
       featured: true,
     },
     {
@@ -24,6 +26,7 @@ export default function Projects() {
       description:
         "Matching system where users can post or accept rides. Includes secure JWT authentication and cloud deployment.",
       tech: ["Spring Boot", "Angular", "MongoDB", "AWS EC2", "Cognito"],
+      githubUrl: "https://github.com/Naveenramgeek/ride-matching-app",
       featured: true,
     },
     {
@@ -31,6 +34,7 @@ export default function Projects() {
       description:
         "Detects COVID-19 from CT scans using explainable AI to provide transparency in predictions.",
       tech: ["Python", "LIME", "GradCAM"],
+      githubUrl: "https://github.com/Naveenramgeek/covid-detection-xai",
       featured: true,
     },
   ];
@@ -82,13 +86,11 @@ export default function Projects() {
                     ))}
                   </div>
                   <div className="flex gap-2">
-                    <Button variant="outline" size="sm" className="flex-1">
-                      <GithubIcon className="mr-2 h-3 w-3" />
-                      Code
-                    </Button>
-                    <Button variant="default" size="sm" className="flex-1">
-                      <ExternalLinkIcon className="mr-2 h-3 w-3" />
-                      Live Demo
+                    <Button variant="outline" size="sm" className="w-full" asChild>
+                      <a href={project.githubUrl} target="_blank" rel="noopener noreferrer">
+                        <GithubIcon className="mr-2 h-3 w-3" />
+                        View Repository
+                      </a>
                     </Button>
                   </div>
                 </div>
