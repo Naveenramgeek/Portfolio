@@ -37,7 +37,7 @@ export default function Contact() {
     }));
   };
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     // Prevent double submission
@@ -46,28 +46,30 @@ export default function Contact() {
     setIsLoading(true);
 
     try {
-      // Create mailto link with form data
-      const mailtoLink = `mailto:naveenvemula2487@gmail.com?subject=${encodeURIComponent(
-        formData.subject || "Contact Form Message"
-      )}&body=${encodeURIComponent(
-        `Name: ${formData.firstName} ${formData.lastName}\n` +
-        `Email: ${formData.email}\n` +
-        `Subject: ${formData.subject}\n\n` +
-        `Message:\n${formData.message}\n\n` +
-        `---\nSent from portfolio contact form`
-      )}`;
+      // Prepare form data for Formspree
+      const formDataToSend = new FormData();
+      formDataToSend.append('name', `${formData.firstName} ${formData.lastName}`);
+      formDataToSend.append('email', formData.email);
+      formDataToSend.append('subject', formData.subject);
+      formDataToSend.append('message', formData.message);
+      formDataToSend.append('_replyto', formData.email);
 
-      // Open mailto link
-      window.location.href = mailtoLink;
-
-      // Show success message
-      toast({
-        title: "Opening your email client...",
-        description: "A pre-filled email will open. Send it to complete your message.",
+      // Send to Formspree
+      const response = await fetch('https://formspree.io/f/YOUR_FORM_ID', {
+        method: 'POST',
+        body: formDataToSend,
+        headers: {
+          'Accept': 'application/json'
+        }
       });
 
-      // Reset form after a short delay
-      setTimeout(() => {
+      if (response.ok) {
+        toast({
+          title: "Message sent successfully!",
+          description: "Thank you for your message. I'll get back to you within 24 hours.",
+        });
+
+        // Reset form
         setFormData({
           firstName: "",
           lastName: "",
@@ -75,25 +77,16 @@ export default function Contact() {
           subject: "",
           message: "",
         });
-      }, 1000);
-
+      } else {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
     } catch (error) {
-      console.error("Mailto error:", error);
+      console.error("Email send error:", error);
 
-      // Copy to clipboard as fallback
-      const emailContent = `Name: ${formData.firstName} ${formData.lastName}\nEmail: ${formData.email}\nSubject: ${formData.subject}\n\nMessage:\n${formData.message}`;
-
-      navigator.clipboard.writeText(emailContent).then(() => {
-        toast({
-          title: "Message copied to clipboard",
-          description: "Please paste this into an email to naveenvemula2487@gmail.com",
-        });
-      }).catch(() => {
-        toast({
-          title: "Please email me directly",
-          description: "Send your message to: naveenvemula2487@gmail.com",
-          variant: "destructive",
-        });
+      toast({
+        title: "Failed to send message",
+        description: "Please try again or contact me directly at naveenvemula2487@gmail.com",
+        variant: "destructive",
       });
     } finally {
       setIsLoading(false);
@@ -213,7 +206,7 @@ export default function Contact() {
                 </Button>
                 <div className="text-center space-y-3">
                   <p className="text-sm text-muted-foreground">
-                    This will open your email client with a pre-filled message.
+                    Your message will be sent directly to my inbox. I'll respond within 24 hours.
                   </p>
                   <div className="flex flex-col sm:flex-row gap-2">
                     <Button
