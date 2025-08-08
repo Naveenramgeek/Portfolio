@@ -43,7 +43,7 @@ export default function Contact() {
     }));
   };
 
-  const handleSubmit = async (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     // Prevent double submission
@@ -52,22 +52,13 @@ export default function Contact() {
     setIsLoading(true);
 
     try {
-      // Prepare template parameters
-      const templateParams = {
-        from_name: `${formData.firstName} ${formData.lastName}`,
-        from_email: formData.email,
-        subject: formData.subject,
-        message: formData.message,
-        to_name: "Naveen Vemula",
-      };
+      const form = e.currentTarget;
 
-      console.log("Sending email with params:", templateParams);
-
-      // Send email using EmailJS (public key already initialized in useEffect)
-      const result = await emailjs.send(
+      // Try using sendForm method first (more reliable)
+      const result = await emailjs.sendForm(
         "YOUR_SERVICE_ID", // Replace with your EmailJS service ID
         "YOUR_TEMPLATE_ID", // Replace with your EmailJS template ID
-        templateParams
+        form
       );
 
       console.log("EmailJS result:", result);
@@ -93,19 +84,55 @@ export default function Contact() {
     } catch (error) {
       console.error("Email send error:", error);
 
-      // Check if it's the body stream error and provide specific guidance
-      if (error instanceof Error && error.message.includes("body stream already read")) {
-        toast({
-          title: "Configuration Error",
-          description: "Please ensure EmailJS is properly configured. Check the setup guide.",
-          variant: "destructive",
-        });
-      } else {
-        toast({
-          title: "Failed to send message",
-          description: "Please try again or contact me directly via email.",
-          variant: "destructive",
-        });
+      // Fallback: Try with send method and manual parameters
+      try {
+        console.log("Trying fallback method...");
+        const templateParams = {
+          from_name: `${formData.firstName} ${formData.lastName}`,
+          from_email: formData.email,
+          subject: formData.subject,
+          message: formData.message,
+          to_name: "Naveen Vemula",
+        };
+
+        const fallbackResult = await emailjs.send(
+          "YOUR_SERVICE_ID",
+          "YOUR_TEMPLATE_ID",
+          templateParams
+        );
+
+        if (fallbackResult.status === 200) {
+          toast({
+            title: "Message sent successfully!",
+            description: "Thank you for your message. I'll get back to you soon.",
+          });
+
+          setFormData({
+            firstName: "",
+            lastName: "",
+            email: "",
+            subject: "",
+            message: "",
+          });
+        } else {
+          throw new Error("Both methods failed");
+        }
+      } catch (fallbackError) {
+        console.error("Fallback also failed:", fallbackError);
+
+        if (error instanceof Error && error.message.includes("body stream already read")) {
+          toast({
+            title: "Configuration Error",
+            description: "Please check EmailJS setup. Contact directly via email for now.",
+            variant: "destructive",
+          });
+        } else {
+          toast({
+            title: "Failed to send message",
+            description: "Please contact me directly via email: naveenvemula2487@gmail.com",
+            variant: "destructive",
+          });
+        }
       }
     } finally {
       setIsLoading(false);
@@ -139,7 +166,7 @@ export default function Contact() {
                     <Label htmlFor="firstName">First Name</Label>
                     <Input
                       id="firstName"
-                      name="firstName"
+                      name="from_name"
                       value={formData.firstName}
                       onChange={handleInputChange}
                       placeholder="John"
@@ -158,13 +185,18 @@ export default function Contact() {
                       required
                       disabled={isLoading}
                     />
+                    <input
+                      type="hidden"
+                      name="from_name"
+                      value={`${formData.firstName} ${formData.lastName}`}
+                    />
                   </div>
                 </div>
                 <div className="space-y-2">
                   <Label htmlFor="email">Email</Label>
                   <Input
                     id="email"
-                    name="email"
+                    name="from_email"
                     type="email"
                     value={formData.email}
                     onChange={handleInputChange}
@@ -197,6 +229,7 @@ export default function Contact() {
                     required
                     disabled={isLoading}
                   />
+                  <input type="hidden" name="to_name" value="Naveen Vemula" />
                 </div>
                 <Button
                   type="submit"
