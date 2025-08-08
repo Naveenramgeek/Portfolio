@@ -37,9 +37,15 @@ export default function Contact() {
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
     const { name, value } = e.target;
+
+    // Map form field names to state field names
+    let fieldName = name;
+    if (name === 'from_email') fieldName = 'email';
+    if (name === 'from_name') fieldName = 'firstName';
+
     setFormData((prev) => ({
       ...prev,
-      [name]: value,
+      [fieldName]: value,
     }));
   };
 
@@ -166,7 +172,7 @@ export default function Contact() {
                     <Label htmlFor="firstName">First Name</Label>
                     <Input
                       id="firstName"
-                      name="from_name"
+                      name="firstName"
                       value={formData.firstName}
                       onChange={handleInputChange}
                       placeholder="John"
@@ -185,18 +191,14 @@ export default function Contact() {
                       required
                       disabled={isLoading}
                     />
-                    <input
-                      type="hidden"
-                      name="from_name"
-                      value={`${formData.firstName} ${formData.lastName}`}
-                    />
+
                   </div>
                 </div>
                 <div className="space-y-2">
                   <Label htmlFor="email">Email</Label>
                   <Input
                     id="email"
-                    name="from_email"
+                    name="email"
                     type="email"
                     value={formData.email}
                     onChange={handleInputChange}
@@ -229,6 +231,10 @@ export default function Contact() {
                     required
                     disabled={isLoading}
                   />
+
+                  {/* Hidden fields for EmailJS */}
+                  <input type="hidden" name="from_name" value={`${formData.firstName} ${formData.lastName}`} />
+                  <input type="hidden" name="from_email" value={formData.email} />
                   <input type="hidden" name="to_name" value="Naveen Vemula" />
                 </div>
                 <Button
