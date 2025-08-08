@@ -137,6 +137,9 @@ export default function Contact() {
               <CardTitle className="text-2xl text-primary">
                 Send a Message
               </CardTitle>
+              <p className="text-muted-foreground">
+                I'm currently available for new opportunities and exciting collaborations.
+              </p>
             </CardHeader>
             <CardContent>
               <form
@@ -346,26 +349,7 @@ export default function Contact() {
           </div>
         </div>
 
-        {/* Call to Action */}
-        <div className="mt-20 text-center">
-          <Card className="max-w-2xl mx-auto bg-gradient-to-r from-primary-50 to-primary-100 dark:from-primary-950/50 dark:to-primary-900/50">
-            <CardContent className="p-8">
-              <h2 className="text-2xl font-bold text-foreground mb-4">
-                Ready to Start a Project?
-              </h2>
-              <p className="text-muted-foreground mb-6">
-                I'm currently available for new opportunities and exciting
-                collaborations.
-              </p>
-              <Button size="lg" asChild>
-                <a href="mailto:naveenvemula2487@gmail.com">
-                  <MailIcon className="mr-2 h-4 w-4" />
-                  Start a Conversation
-                </a>
-              </Button>
-            </CardContent>
-          </Card>
-        </div>
+
       </div>
     </div>
   );
