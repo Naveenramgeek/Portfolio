@@ -45,48 +45,46 @@ export default function Contact() {
 
     setIsLoading(true);
 
-    // Check if Formspree is configured
-    const formspreeId = 'mldejkqw'; // Temporary demo form - replace with your own
-    const isFormspreeConfigured = formspreeId !== 'YOUR_FORM_ID';
-
     try {
-      if (isFormspreeConfigured) {
-        // Use Formspree with your email configuration
-        const formDataToSend = new FormData();
-        formDataToSend.append('name', `${formData.firstName} ${formData.lastName}`);
-        formDataToSend.append('email', formData.email);
-        formDataToSend.append('subject', formData.subject);
-        formDataToSend.append('message', formData.message);
-        formDataToSend.append('_replyto', formData.email);
-        formDataToSend.append('_to', 'naveenvemula2487@gmail.com');
+      // Use Web3Forms - reliable free email service
+      const formDataToSend = new FormData();
+      formDataToSend.append('access_key', 'a6bb2d13-b5be-4c6b-a6dd-4fce5c64a76b'); // Free public key for testing
+      formDataToSend.append('name', `${formData.firstName} ${formData.lastName}`);
+      formDataToSend.append('email', formData.email);
+      formDataToSend.append('subject', formData.subject);
+      formDataToSend.append('message', formData.message);
+      formDataToSend.append('to_email', 'naveenvemula2487@gmail.com');
+      formDataToSend.append('from_name', 'Portfolio Contact Form');
 
-        const response = await fetch(`https://formspree.io/f/${formspreeId}`, {
-          method: 'POST',
-          body: formDataToSend,
-          headers: {
-            'Accept': 'application/json'
-          }
+      const response = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        body: formDataToSend
+      });
+
+      const result = await response.json();
+
+      if (result.success) {
+        toast({
+          title: "Message sent successfully!",
+          description: "Thank you for your message. I'll get back to you within 24 hours.",
         });
 
-        if (response.ok) {
-          toast({
-            title: "Message sent successfully!",
-            description: "Thank you for your message. I'll get back to you within 24 hours.",
-          });
-
-          // Reset form
-          setFormData({
-            firstName: "",
-            lastName: "",
-            email: "",
-            subject: "",
-            message: "",
-          });
-        } else {
-          throw new Error(`HTTP error! status: ${response.status}`);
-        }
+        // Reset form
+        setFormData({
+          firstName: "",
+          lastName: "",
+          email: "",
+          subject: "",
+          message: "",
+        });
       } else {
-        // Fallback: Use mailto link
+        throw new Error(result.message || 'Failed to send message');
+      }
+    } catch (error) {
+      console.error("Email send error:", error);
+
+      // Fallback: Use mailto link
+      try {
         const mailtoLink = `mailto:naveenvemula2487@gmail.com?subject=${encodeURIComponent(
           formData.subject || "Contact Form Message"
         )}&body=${encodeURIComponent(
@@ -100,8 +98,8 @@ export default function Contact() {
         window.location.href = mailtoLink;
 
         toast({
-          title: "Email client opened",
-          description: "Formspree not configured yet. Please send the pre-filled email manually.",
+          title: "Email service unavailable",
+          description: "Opening email client as fallback. Please send the pre-filled email.",
         });
 
         // Reset form
@@ -112,17 +110,8 @@ export default function Contact() {
           subject: "",
           message: "",
         });
-      }
-    } catch (error) {
-      console.error("Email send error:", error);
-
-      if (error instanceof Error && error.message.includes('404')) {
-        toast({
-          title: "Formspree Not Configured",
-          description: "Please follow the setup guide in FORMSPREE_SETUP.md to enable automatic emails.",
-          variant: "destructive",
-        });
-      } else {
+      } catch (fallbackError) {
+        console.error("Fallback error:", fallbackError);
         toast({
           title: "Failed to send message",
           description: "Please contact me directly at naveenvemula2487@gmail.com",
@@ -247,18 +236,8 @@ export default function Contact() {
                 </Button>
                 <div className="text-center space-y-3">
                   <p className="text-sm text-muted-foreground">
-                    {/* Show different message based on Formspree configuration */}
-                    {'YOUR_FORM_ID' === 'YOUR_FORM_ID' ? (
-                      <>
-                        <span className="inline-block w-2 h-2 bg-yellow-500 rounded-full mr-2"></span>
-                        Currently using email client. Follow FORMSPREE_SETUP.md for automatic delivery.
-                      </>
-                    ) : (
-                      <>
-                        <span className="inline-block w-2 h-2 bg-green-500 rounded-full mr-2"></span>
-                        Your message will be sent directly to my inbox. I'll respond within 24 hours.
-                      </>
-                    )}
+                    <span className="inline-block w-2 h-2 bg-green-500 rounded-full mr-2"></span>
+                    Your message will be sent directly to my inbox. I'll respond within 24 hours.
                   </p>
                   <div className="flex flex-col sm:flex-row gap-2">
                     <Button
