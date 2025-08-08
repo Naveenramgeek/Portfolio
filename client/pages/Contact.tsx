@@ -1,5 +1,4 @@
-import { useState, useEffect } from "react";
-import emailjs from "@emailjs/browser";
+import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -28,36 +27,17 @@ export default function Contact() {
     message: "",
   });
 
-  // Initialize EmailJS once when component mounts
-  useEffect(() => {
-    // Only initialize if not already initialized
-    try {
-      emailjs.init({
-        publicKey: "YOUR_PUBLIC_KEY", // Replace with your EmailJS public key
-      });
-      console.log("EmailJS initialized successfully");
-    } catch (error) {
-      console.error("EmailJS initialization error:", error);
-    }
-  }, []);
-
   const handleInputChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
     const { name, value } = e.target;
-
-    // Map form field names to state field names
-    let fieldName = name;
-    if (name === 'from_email') fieldName = 'email';
-    if (name === 'from_name') fieldName = 'firstName';
-
     setFormData((prev) => ({
       ...prev,
-      [fieldName]: value,
+      [name]: value,
     }));
   };
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     // Prevent double submission
@@ -65,46 +45,29 @@ export default function Contact() {
 
     setIsLoading(true);
 
-    // Add a small delay to ensure EmailJS is properly initialized
-    await new Promise(resolve => setTimeout(resolve, 100));
-
     try {
-      // Validate that EmailJS is ready
-      if (typeof emailjs === 'undefined') {
-        throw new Error("EmailJS not loaded");
-      }
+      // Create mailto link with form data
+      const mailtoLink = `mailto:naveenvemula2487@gmail.com?subject=${encodeURIComponent(
+        formData.subject || "Contact Form Message"
+      )}&body=${encodeURIComponent(
+        `Name: ${formData.firstName} ${formData.lastName}\n` +
+        `Email: ${formData.email}\n` +
+        `Subject: ${formData.subject}\n\n` +
+        `Message:\n${formData.message}\n\n` +
+        `---\nSent from portfolio contact form`
+      )}`;
 
-      // Prepare template parameters manually to avoid form issues
-      const templateParams = {
-        from_name: `${formData.firstName} ${formData.lastName}`.trim(),
-        from_email: formData.email,
-        subject: formData.subject,
-        message: formData.message,
-        to_name: "Naveen Vemula",
-      };
+      // Open mailto link
+      window.location.href = mailtoLink;
 
-      console.log("Sending email with params:", templateParams);
+      // Show success message
+      toast({
+        title: "Opening your email client...",
+        description: "A pre-filled email will open. Send it to complete your message.",
+      });
 
-      // Use emailjs.send with explicit parameters
-      const result = await emailjs.send(
-        "YOUR_SERVICE_ID", // Replace with your EmailJS service ID
-        "YOUR_TEMPLATE_ID", // Replace with your EmailJS template ID
-        templateParams,
-        {
-          publicKey: "YOUR_PUBLIC_KEY" // Replace with your EmailJS public key
-        }
-      );
-
-      console.log("EmailJS result:", result);
-
-      // Check for successful response
-      if (result.status === 200 || result.text === 'OK') {
-        toast({
-          title: "Message sent successfully!",
-          description: "Thank you for your message. I'll get back to you soon.",
-        });
-
-        // Reset form
+      // Reset form after a short delay
+      setTimeout(() => {
         setFormData({
           firstName: "",
           lastName: "",
@@ -112,40 +75,26 @@ export default function Contact() {
           subject: "",
           message: "",
         });
-      } else {
-        throw new Error(`EmailJS returned status: ${result.status}`);
-      }
-    } catch (error) {
-      console.error("Email send error:", error);
+      }, 1000);
 
-      // Show helpful error message based on error type
-      if (error instanceof Error) {
-        if (error.message.includes("body stream already read")) {
-          toast({
-            title: "EmailJS Configuration Issue",
-            description: "Please verify your EmailJS service ID, template ID, and public key are correct.",
-            variant: "destructive",
-          });
-        } else if (error.message.includes("Invalid service ID") || error.message.includes("Template")) {
-          toast({
-            title: "Configuration Error",
-            description: "EmailJS service or template not found. Please check your setup.",
-            variant: "destructive",
-          });
-        } else {
-          toast({
-            title: "Failed to send message",
-            description: "Please contact me directly at: naveenvemula2487@gmail.com",
-            variant: "destructive",
-          });
-        }
-      } else {
+    } catch (error) {
+      console.error("Mailto error:", error);
+
+      // Copy to clipboard as fallback
+      const emailContent = `Name: ${formData.firstName} ${formData.lastName}\nEmail: ${formData.email}\nSubject: ${formData.subject}\n\nMessage:\n${formData.message}`;
+
+      navigator.clipboard.writeText(emailContent).then(() => {
         toast({
-          title: "Network Error",
-          description: "Please check your internet connection and try again.",
+          title: "Message copied to clipboard",
+          description: "Please paste this into an email to naveenvemula2487@gmail.com",
+        });
+      }).catch(() => {
+        toast({
+          title: "Please email me directly",
+          description: "Send your message to: naveenvemula2487@gmail.com",
           variant: "destructive",
         });
-      }
+      });
     } finally {
       setIsLoading(false);
     }
