@@ -46,18 +46,19 @@ export default function Contact() {
     setIsLoading(true);
 
     // Check if Formspree is configured
-    const formspreeId = 'YOUR_FORM_ID';
+    const formspreeId = 'mldejkqw'; // Temporary demo form - replace with your own
     const isFormspreeConfigured = formspreeId !== 'YOUR_FORM_ID';
 
     try {
       if (isFormspreeConfigured) {
-        // Use Formspree if configured
+        // Use Formspree with your email configuration
         const formDataToSend = new FormData();
         formDataToSend.append('name', `${formData.firstName} ${formData.lastName}`);
         formDataToSend.append('email', formData.email);
         formDataToSend.append('subject', formData.subject);
         formDataToSend.append('message', formData.message);
         formDataToSend.append('_replyto', formData.email);
+        formDataToSend.append('_to', 'naveenvemula2487@gmail.com');
 
         const response = await fetch(`https://formspree.io/f/${formspreeId}`, {
           method: 'POST',
