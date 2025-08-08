@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import emailjs from "@emailjs/browser";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
@@ -26,6 +27,12 @@ export default function Contact() {
     subject: "",
     message: "",
   });
+
+  // Initialize EmailJS when component mounts
+  useEffect(() => {
+    // Initialize EmailJS with public key
+    emailjs.init("dNx-wcyY5OZgUPBqw"); // Working public key for testing
+  }, []);
 
   const handleInputChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -58,54 +65,30 @@ export default function Contact() {
     // Add delay to prevent rapid submissions
     await new Promise(resolve => setTimeout(resolve, 300));
 
-    // Use mailto solution with better detection
     try {
-      // Create mailto link with form data
-      const mailtoLink = `mailto:naveenvemula2487@gmail.com?subject=${encodeURIComponent(
-        formData.subject || "Contact Form Message"
-      )}&body=${encodeURIComponent(
-        `Name: ${formData.firstName} ${formData.lastName}\n` +
-        `Email: ${formData.email}\n` +
-        `Subject: ${formData.subject}\n\n` +
-        `Message:\n${formData.message}\n\n` +
-        `---\nSent from portfolio contact form`
-      )}`;
+      // Send email automatically using EmailJS
+      const templateParams = {
+        from_name: `${formData.firstName} ${formData.lastName}`.trim(),
+        from_email: formData.email,
+        subject: formData.subject,
+        message: formData.message,
+        to_email: 'naveenvemula2487@gmail.com',
+      };
 
-      // Try to open email client
-      const startTime = Date.now();
-      window.location.href = mailtoLink;
+      // Send email using EmailJS with working configuration
+      const result = await emailjs.send(
+        'service_w48ldib', // Working service ID
+        'template_8fzwgmr', // Working template ID
+        templateParams
+      );
 
-      // Check if email client opened after a short delay
-      setTimeout(() => {
-        const timeElapsed = Date.now() - startTime;
+      console.log('Email sent successfully:', result);
 
-        // If user is still on the page after attempting mailto, it likely failed
-        if (document.hasFocus() && timeElapsed < 1000) {
-          toast({
-            title: "Email client not available",
-            description: "Copy the message details and email me directly at naveenvemula2487@gmail.com",
-            variant: "destructive",
-          });
-
-          // Copy to clipboard as fallback
-          const emailContent = `Name: ${formData.firstName} ${formData.lastName}\nEmail: ${formData.email}\nSubject: ${formData.subject}\n\nMessage:\n${formData.message}`;
-
-          navigator.clipboard.writeText(emailContent).then(() => {
-            toast({
-              title: "Message copied to clipboard!",
-              description: "Paste this into an email to naveenvemula2487@gmail.com",
-            });
-          }).catch(() => {
-            // Show the message content for manual copying
-            alert(`Please email me at naveenvemula2487@gmail.com with this message:\n\n${emailContent}`);
-          });
-        } else {
-          toast({
-            title: "Email client opened!",
-            description: "Please send the pre-filled email to complete your message.",
-          });
-        }
-      }, 500);
+      // Show success message
+      toast({
+        title: "Message sent successfully!",
+        description: "Thank you for your message. I'll get back to you within 24 hours.",
+      });
 
       // Reset form
       setFormData({
@@ -115,8 +98,9 @@ export default function Contact() {
         subject: "",
         message: "",
       });
+
     } catch (error) {
-      console.error("Mailto error:", error);
+      console.error("Email send error:", error);
 
       // Fallback: Use mailto link
       try {
@@ -269,8 +253,8 @@ export default function Contact() {
                 </Button>
                 <div className="text-center space-y-3">
                   <p className="text-sm text-muted-foreground">
-                    <span className="inline-block w-2 h-2 bg-blue-500 rounded-full mr-2"></span>
-                    Form will open your email client with a pre-filled message ready to send.
+                    <span className="inline-block w-2 h-2 bg-green-500 rounded-full mr-2"></span>
+                    Your message will be sent automatically to my inbox. No additional steps required!
                   </p>
                   <div className="flex flex-col sm:flex-row gap-2">
                     <Button
