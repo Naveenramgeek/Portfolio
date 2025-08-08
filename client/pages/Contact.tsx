@@ -257,7 +257,7 @@ export default function Contact() {
                 <div className="text-center space-y-3">
                   <p className="text-sm text-muted-foreground">
                     <span className="inline-block w-2 h-2 bg-green-500 rounded-full mr-2"></span>
-                    Your message will be sent directly to my inbox. I'll respond within 24 hours.
+                    Contact form ready! Messages will be delivered to my inbox or email client.
                   </p>
                   <div className="flex flex-col sm:flex-row gap-2">
                     <Button
