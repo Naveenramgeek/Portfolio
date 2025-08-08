@@ -35,17 +35,21 @@ This message was sent from your portfolio contact form.
 
 ## Step 4: Get Your Credentials
 1. **Service ID**: Found in Email Services section
-2. **Template ID**: Found in Email Templates section  
+2. **Template ID**: Found in Email Templates section
 3. **Public Key**: Go to Account > API Keys
 
 ## Step 5: Update Contact Form
 Open `client/pages/Contact.tsx` and replace these placeholders:
 
 ```javascript
-// Line ~45-50, replace these values:
+// Line ~49: emailjs.init("YOUR_PUBLIC_KEY")
+// Line ~56: "YOUR_SERVICE_ID"
+// Line ~57: "YOUR_TEMPLATE_ID"
+
+Replace:
 "YOUR_SERVICE_ID"    // Replace with your Service ID
-"YOUR_TEMPLATE_ID"   // Replace with your Template ID  
-"YOUR_PUBLIC_KEY"    // Replace with your Public Key
+"YOUR_TEMPLATE_ID"   // Replace with your Template ID
+"YOUR_PUBLIC_KEY"    // Replace with your Public Key (appears twice)
 ```
 
 ## Step 6: Test
