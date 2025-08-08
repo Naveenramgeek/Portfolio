@@ -18,7 +18,7 @@ export default function Projects() {
       description:
         "Real-time collaborative coding platform with integrated video/audio using Zoom SDK. Addressed SSR-related integration issues.",
       tech: ["Angular", "Node.js", "Zoom Video SDK"],
-      githubUrl: "https://github.com/Naveenramgeek/lets-code",
+      githubUrl: "https://github.com/Naveenramgeek/Zoom-SDK-Integration",
       featured: true,
     },
     {
@@ -26,7 +26,7 @@ export default function Projects() {
       description:
         "Matching system where users can post or accept rides. Includes secure JWT authentication and cloud deployment.",
       tech: ["Spring Boot", "Angular", "MongoDB", "AWS EC2", "Cognito"],
-      githubUrl: "https://github.com/Naveenramgeek/ride-matching-app",
+      githubUrl: "https://github.com/Naveenramgeek/ride-app-client-server",
       featured: true,
     },
     {
