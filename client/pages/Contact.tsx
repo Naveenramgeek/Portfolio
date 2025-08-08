@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import emailjs from "@emailjs/browser";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
@@ -28,6 +28,11 @@ export default function Contact() {
     message: "",
   });
 
+  // Initialize EmailJS once when component mounts
+  useEffect(() => {
+    emailjs.init("YOUR_PUBLIC_KEY"); // Replace with your EmailJS public key
+  }, []);
+
   const handleInputChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
@@ -47,9 +52,6 @@ export default function Contact() {
     setIsLoading(true);
 
     try {
-      // Initialize EmailJS with public key
-      emailjs.init("YOUR_PUBLIC_KEY"); // Replace with your EmailJS public key
-
       // Prepare template parameters
       const templateParams = {
         from_name: `${formData.firstName} ${formData.lastName}`,
@@ -59,7 +61,9 @@ export default function Contact() {
         to_name: "Naveen Vemula",
       };
 
-      // Send email using EmailJS
+      console.log("Sending email with params:", templateParams);
+
+      // Send email using EmailJS (public key already initialized in useEffect)
       const result = await emailjs.send(
         "YOUR_SERVICE_ID", // Replace with your EmailJS service ID
         "YOUR_TEMPLATE_ID", // Replace with your EmailJS template ID
@@ -68,7 +72,8 @@ export default function Contact() {
 
       console.log("EmailJS result:", result);
 
-      if (result.status === 200 || result.text === 'OK') {
+      // Check for successful response
+      if (result.status === 200) {
         toast({
           title: "Message sent successfully!",
           description: "Thank you for your message. I'll get back to you soon.",
@@ -83,15 +88,25 @@ export default function Contact() {
           message: "",
         });
       } else {
-        throw new Error("Failed to send email");
+        throw new Error(`EmailJS returned status: ${result.status}`);
       }
     } catch (error) {
       console.error("Email send error:", error);
-      toast({
-        title: "Failed to send message",
-        description: "Please try again or contact me directly via email.",
-        variant: "destructive",
-      });
+
+      // Check if it's the body stream error and provide specific guidance
+      if (error instanceof Error && error.message.includes("body stream already read")) {
+        toast({
+          title: "Configuration Error",
+          description: "Please ensure EmailJS is properly configured. Check the setup guide.",
+          variant: "destructive",
+        });
+      } else {
+        toast({
+          title: "Failed to send message",
+          description: "Please try again or contact me directly via email.",
+          variant: "destructive",
+        });
+      }
     } finally {
       setIsLoading(false);
     }
