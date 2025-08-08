@@ -227,40 +227,11 @@ export default function Contact() {
                     </>
                   )}
                 </Button>
-                <div className="text-center space-y-3">
+                <div className="text-center">
                   <p className="text-sm text-muted-foreground">
                     <span className="inline-block w-2 h-2 bg-green-500 rounded-full mr-2"></span>
                     Your message will be sent automatically to my inbox. No additional steps required!
                   </p>
-                  <div className="flex flex-col sm:flex-row gap-2">
-                    <Button
-                      type="button"
-                      variant="outline"
-                      className="flex-1"
-                      asChild
-                    >
-                      <a href="mailto:naveenvemula2487@gmail.com">
-                        <MailIcon className="mr-2 h-4 w-4" />
-                        Send Direct Email
-                      </a>
-                    </Button>
-                    <Button
-                      type="button"
-                      variant="outline"
-                      className="flex-1"
-                      onClick={() => {
-                        const emailContent = `Name: ${formData.firstName} ${formData.lastName}\nEmail: ${formData.email}\nSubject: ${formData.subject}\n\nMessage:\n${formData.message}`;
-                        navigator.clipboard.writeText(emailContent).then(() => {
-                          toast({
-                            title: "Message copied!",
-                            description: "Paste into an email to naveenvemula2487@gmail.com",
-                          });
-                        });
-                      }}
-                    >
-                      📋 Copy Message
-                    </Button>
-                  </div>
                 </div>
               </form>
             </CardContent>
