@@ -30,7 +30,15 @@ export default function Contact() {
 
   // Initialize EmailJS once when component mounts
   useEffect(() => {
-    emailjs.init("YOUR_PUBLIC_KEY"); // Replace with your EmailJS public key
+    // Only initialize if not already initialized
+    try {
+      emailjs.init({
+        publicKey: "YOUR_PUBLIC_KEY", // Replace with your EmailJS public key
+      });
+      console.log("EmailJS initialized successfully");
+    } catch (error) {
+      console.error("EmailJS initialization error:", error);
+    }
   }, []);
 
   const handleInputChange = (
@@ -57,20 +65,40 @@ export default function Contact() {
 
     setIsLoading(true);
 
-    try {
-      const form = e.currentTarget;
+    // Add a small delay to ensure EmailJS is properly initialized
+    await new Promise(resolve => setTimeout(resolve, 100));
 
-      // Try using sendForm method first (more reliable)
-      const result = await emailjs.sendForm(
+    try {
+      // Validate that EmailJS is ready
+      if (typeof emailjs === 'undefined') {
+        throw new Error("EmailJS not loaded");
+      }
+
+      // Prepare template parameters manually to avoid form issues
+      const templateParams = {
+        from_name: `${formData.firstName} ${formData.lastName}`.trim(),
+        from_email: formData.email,
+        subject: formData.subject,
+        message: formData.message,
+        to_name: "Naveen Vemula",
+      };
+
+      console.log("Sending email with params:", templateParams);
+
+      // Use emailjs.send with explicit parameters
+      const result = await emailjs.send(
         "YOUR_SERVICE_ID", // Replace with your EmailJS service ID
         "YOUR_TEMPLATE_ID", // Replace with your EmailJS template ID
-        form
+        templateParams,
+        {
+          publicKey: "YOUR_PUBLIC_KEY" // Replace with your EmailJS public key
+        }
       );
 
       console.log("EmailJS result:", result);
 
       // Check for successful response
-      if (result.status === 200) {
+      if (result.status === 200 || result.text === 'OK') {
         toast({
           title: "Message sent successfully!",
           description: "Thank you for your message. I'll get back to you soon.",
@@ -90,55 +118,33 @@ export default function Contact() {
     } catch (error) {
       console.error("Email send error:", error);
 
-      // Fallback: Try with send method and manual parameters
-      try {
-        console.log("Trying fallback method...");
-        const templateParams = {
-          from_name: `${formData.firstName} ${formData.lastName}`,
-          from_email: formData.email,
-          subject: formData.subject,
-          message: formData.message,
-          to_name: "Naveen Vemula",
-        };
-
-        const fallbackResult = await emailjs.send(
-          "YOUR_SERVICE_ID",
-          "YOUR_TEMPLATE_ID",
-          templateParams
-        );
-
-        if (fallbackResult.status === 200) {
+      // Show helpful error message based on error type
+      if (error instanceof Error) {
+        if (error.message.includes("body stream already read")) {
           toast({
-            title: "Message sent successfully!",
-            description: "Thank you for your message. I'll get back to you soon.",
+            title: "EmailJS Configuration Issue",
+            description: "Please verify your EmailJS service ID, template ID, and public key are correct.",
+            variant: "destructive",
           });
-
-          setFormData({
-            firstName: "",
-            lastName: "",
-            email: "",
-            subject: "",
-            message: "",
-          });
-        } else {
-          throw new Error("Both methods failed");
-        }
-      } catch (fallbackError) {
-        console.error("Fallback also failed:", fallbackError);
-
-        if (error instanceof Error && error.message.includes("body stream already read")) {
+        } else if (error.message.includes("Invalid service ID") || error.message.includes("Template")) {
           toast({
             title: "Configuration Error",
-            description: "Please check EmailJS setup. Contact directly via email for now.",
+            description: "EmailJS service or template not found. Please check your setup.",
             variant: "destructive",
           });
         } else {
           toast({
             title: "Failed to send message",
-            description: "Please contact me directly via email: naveenvemula2487@gmail.com",
+            description: "Please contact me directly at: naveenvemula2487@gmail.com",
             variant: "destructive",
           });
         }
+      } else {
+        toast({
+          title: "Network Error",
+          description: "Please check your internet connection and try again.",
+          variant: "destructive",
+        });
       }
     } finally {
       setIsLoading(false);
@@ -232,10 +238,6 @@ export default function Contact() {
                     disabled={isLoading}
                   />
 
-                  {/* Hidden fields for EmailJS */}
-                  <input type="hidden" name="from_name" value={`${formData.firstName} ${formData.lastName}`} />
-                  <input type="hidden" name="from_email" value={formData.email} />
-                  <input type="hidden" name="to_name" value="Naveen Vemula" />
                 </div>
                 <Button
                   type="submit"
