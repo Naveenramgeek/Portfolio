@@ -23,17 +23,19 @@ Your contact form is now configured to use Formspree for reliable email delivery
 
 ## Step 4: Update Your Contact Form
 1. Open `client/pages/Contact.tsx`
-2. Find line ~42: `'https://formspree.io/f/YOUR_FORM_ID'`
+2. Find line ~45: `const formspreeId = 'YOUR_FORM_ID';`
 3. Replace `YOUR_FORM_ID` with your actual form ID
 
 Example:
 ```javascript
 // Replace this:
-const response = await fetch('https://formspree.io/f/YOUR_FORM_ID', {
+const formspreeId = 'YOUR_FORM_ID';
 
 // With this (using your actual form ID):
-const response = await fetch('https://formspree.io/f/abcd1234', {
+const formspreeId = 'abcd1234';
 ```
+
+**Important:** The form ID is just the part after `/f/` in your Formspree URL!
 
 ## Step 5: Test Your Form
 1. Fill out your contact form on your website
