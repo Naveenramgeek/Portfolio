@@ -40,24 +40,35 @@ export default function Contact() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+
+    // Prevent double submission
+    if (isLoading) return;
+
     setIsLoading(true);
 
     try {
-      // EmailJS configuration - you'll need to replace these with your actual values
+      // Initialize EmailJS with public key
+      emailjs.init("YOUR_PUBLIC_KEY"); // Replace with your EmailJS public key
+
+      // Prepare template parameters
+      const templateParams = {
+        from_name: `${formData.firstName} ${formData.lastName}`,
+        from_email: formData.email,
+        subject: formData.subject,
+        message: formData.message,
+        to_name: "Naveen Vemula",
+      };
+
+      // Send email using EmailJS
       const result = await emailjs.send(
         "YOUR_SERVICE_ID", // Replace with your EmailJS service ID
         "YOUR_TEMPLATE_ID", // Replace with your EmailJS template ID
-        {
-          from_name: `${formData.firstName} ${formData.lastName}`,
-          from_email: formData.email,
-          subject: formData.subject,
-          message: formData.message,
-          to_name: "Naveen Vemula",
-        },
-        "YOUR_PUBLIC_KEY" // Replace with your EmailJS public key
+        templateParams
       );
 
-      if (result.status === 200) {
+      console.log("EmailJS result:", result);
+
+      if (result.status === 200 || result.text === 'OK') {
         toast({
           title: "Message sent successfully!",
           description: "Thank you for your message. I'll get back to you soon.",
@@ -71,6 +82,8 @@ export default function Contact() {
           subject: "",
           message: "",
         });
+      } else {
+        throw new Error("Failed to send email");
       }
     } catch (error) {
       console.error("Email send error:", error);
@@ -105,7 +118,7 @@ export default function Contact() {
               </CardTitle>
             </CardHeader>
             <CardContent>
-              <form onSubmit={handleSubmit} className="space-y-6">
+              <form onSubmit={handleSubmit} className="space-y-6" noValidate>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div className="space-y-2">
                     <Label htmlFor="firstName">First Name</Label>
@@ -170,7 +183,17 @@ export default function Contact() {
                     disabled={isLoading}
                   />
                 </div>
-                <Button type="submit" className="w-full" disabled={isLoading}>
+                <Button
+                  type="submit"
+                  className="w-full"
+                  disabled={isLoading}
+                  onClick={(e) => {
+                    if (isLoading) {
+                      e.preventDefault();
+                      return false;
+                    }
+                  }}
+                >
                   {isLoading ? (
                     <>
                       <Loader2Icon className="mr-2 h-4 w-4 animate-spin" />
