@@ -94,9 +94,9 @@ export default function Index() {
                   transition={{ delay: 0.4, duration: 0.8 }}
                   className="text-xl text-muted-foreground mb-8 max-w-2xl"
                 >
-                  AI-Powered Full-Stack Developer specializing in Python, React,
-                  Java, Spring Boot, Angular, and AWS. Building enterprise-grade
-                  applications with cutting-edge AI integrations.
+                  AI-Powered Full-Stack Developer specializing in Python, React, Java, Spring
+                  Boot, Angular, and AWS. Building enterprise-grade applications
+                  with cutting-edge AI integrations.
                 </motion.p>
               </div>
 
@@ -128,7 +128,7 @@ export default function Index() {
               >
                 <Button variant="ghost" size="sm" asChild>
                   <a
-                    href="https://www.linkedin.com/in/naveen-vemula"
+                    href="https://www.linkedin.com/in/naveen-vemula-3a3345192/"
                     target="_blank"
                     rel="noopener noreferrer"
                   >

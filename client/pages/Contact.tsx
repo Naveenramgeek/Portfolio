@@ -141,7 +141,7 @@ export default function Contact() {
                   asChild
                 >
                   <a
-                    href="https://www.linkedin.com/in/naveen-vemula"
+                    href="https://www.linkedin.com/in/naveen-vemula-3a3345192/"
                     target="_blank"
                     rel="noopener noreferrer"
                   >
