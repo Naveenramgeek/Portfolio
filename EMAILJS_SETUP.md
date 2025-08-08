@@ -42,11 +42,12 @@ This message was sent from your portfolio contact form.
 Open `client/pages/Contact.tsx` and replace these placeholders:
 
 ```javascript
-// Line ~49: emailjs.init("YOUR_PUBLIC_KEY")
-// Line ~56: "YOUR_SERVICE_ID"
-// Line ~57: "YOUR_TEMPLATE_ID"
+// Line ~34: publicKey: "YOUR_PUBLIC_KEY"
+// Line ~82: "YOUR_SERVICE_ID"
+// Line ~83: "YOUR_TEMPLATE_ID"
+// Line ~87: publicKey: "YOUR_PUBLIC_KEY"
 
-Replace:
+Replace all instances of:
 "YOUR_SERVICE_ID"    // Replace with your Service ID
 "YOUR_TEMPLATE_ID"   // Replace with your Template ID
 "YOUR_PUBLIC_KEY"    // Replace with your Public Key (appears twice)
