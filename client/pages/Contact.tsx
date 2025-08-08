@@ -58,7 +58,7 @@ export default function Contact() {
     // Add delay to prevent rapid submissions
     await new Promise(resolve => setTimeout(resolve, 300));
 
-    // Use mailto solution that works immediately
+    // Use mailto solution with better detection
     try {
       // Create mailto link with form data
       const mailtoLink = `mailto:naveenvemula2487@gmail.com?subject=${encodeURIComponent(
@@ -71,14 +71,41 @@ export default function Contact() {
         `---\nSent from portfolio contact form`
       )}`;
 
-      // Open mailto link
+      // Try to open email client
+      const startTime = Date.now();
       window.location.href = mailtoLink;
 
-      // Show success message
-      toast({
-        title: "Email client opened successfully!",
-        description: "Please send the pre-filled email to complete your message.",
-      });
+      // Check if email client opened after a short delay
+      setTimeout(() => {
+        const timeElapsed = Date.now() - startTime;
+
+        // If user is still on the page after attempting mailto, it likely failed
+        if (document.hasFocus() && timeElapsed < 1000) {
+          toast({
+            title: "Email client not available",
+            description: "Copy the message details and email me directly at naveenvemula2487@gmail.com",
+            variant: "destructive",
+          });
+
+          // Copy to clipboard as fallback
+          const emailContent = `Name: ${formData.firstName} ${formData.lastName}\nEmail: ${formData.email}\nSubject: ${formData.subject}\n\nMessage:\n${formData.message}`;
+
+          navigator.clipboard.writeText(emailContent).then(() => {
+            toast({
+              title: "Message copied to clipboard!",
+              description: "Paste this into an email to naveenvemula2487@gmail.com",
+            });
+          }).catch(() => {
+            // Show the message content for manual copying
+            alert(`Please email me at naveenvemula2487@gmail.com with this message:\n\n${emailContent}`);
+          });
+        } else {
+          toast({
+            title: "Email client opened!",
+            description: "Please send the pre-filled email to complete your message.",
+          });
+        }
+      }, 500);
 
       // Reset form
       setFormData({
@@ -256,6 +283,22 @@ export default function Contact() {
                         <MailIcon className="mr-2 h-4 w-4" />
                         Send Direct Email
                       </a>
+                    </Button>
+                    <Button
+                      type="button"
+                      variant="outline"
+                      className="flex-1"
+                      onClick={() => {
+                        const emailContent = `Name: ${formData.firstName} ${formData.lastName}\nEmail: ${formData.email}\nSubject: ${formData.subject}\n\nMessage:\n${formData.message}`;
+                        navigator.clipboard.writeText(emailContent).then(() => {
+                          toast({
+                            title: "Message copied!",
+                            description: "Paste into an email to naveenvemula2487@gmail.com",
+                          });
+                        });
+                      }}
+                    >
+                      📋 Copy Message
                     </Button>
                   </div>
                 </div>
