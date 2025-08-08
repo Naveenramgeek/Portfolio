@@ -58,41 +58,38 @@ export default function Contact() {
     // Add delay to prevent rapid submissions
     await new Promise(resolve => setTimeout(resolve, 300));
 
+    // Use mailto solution that works immediately
     try {
-      // Use Netlify Forms approach - works automatically when deployed
-      const formDataToSend = new FormData();
-      formDataToSend.append('form-name', 'contact');
-      formDataToSend.append('name', `${formData.firstName} ${formData.lastName}`.trim());
-      formDataToSend.append('email', formData.email);
-      formDataToSend.append('subject', formData.subject);
-      formDataToSend.append('message', formData.message);
+      // Create mailto link with form data
+      const mailtoLink = `mailto:naveenvemula2487@gmail.com?subject=${encodeURIComponent(
+        formData.subject || "Contact Form Message"
+      )}&body=${encodeURIComponent(
+        `Name: ${formData.firstName} ${formData.lastName}\n` +
+        `Email: ${formData.email}\n` +
+        `Subject: ${formData.subject}\n\n` +
+        `Message:\n${formData.message}\n\n` +
+        `---\nSent from portfolio contact form`
+      )}`;
 
-      // Try Netlify Forms submission first
-      const response = await fetch('/', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-        body: new URLSearchParams(formDataToSend).toString()
+      // Open mailto link
+      window.location.href = mailtoLink;
+
+      // Show success message
+      toast({
+        title: "Email client opened successfully!",
+        description: "Please send the pre-filled email to complete your message.",
       });
 
-      if (response.ok) {
-        toast({
-          title: "Message sent successfully!",
-          description: "Thank you for your message. I'll get back to you within 24 hours.",
-        });
-
-        // Reset form
-        setFormData({
-          firstName: "",
-          lastName: "",
-          email: "",
-          subject: "",
-          message: "",
-        });
-      } else {
-        throw new Error(`HTTP error! status: ${response.status}`);
-      }
+      // Reset form
+      setFormData({
+        firstName: "",
+        lastName: "",
+        email: "",
+        subject: "",
+        message: "",
+      });
     } catch (error) {
-      console.error("Email send error:", error);
+      console.error("Mailto error:", error);
 
       // Fallback: Use mailto link
       try {
@@ -159,18 +156,7 @@ export default function Contact() {
                 onSubmit={handleSubmit}
                 className="space-y-6"
                 noValidate
-                name="contact"
-                data-netlify="true"
-                data-netlify-honeypot="bot-field"
               >
-                {/* Hidden field for Netlify Forms */}
-                <input type="hidden" name="form-name" value="contact" />
-                {/* Honeypot field for spam protection */}
-                <div style={{ display: 'none' }}>
-                  <label>
-                    Don't fill this out if you're human: <input name="bot-field" />
-                  </label>
-                </div>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div className="space-y-2">
                     <Label htmlFor="firstName">First Name</Label>
@@ -256,8 +242,8 @@ export default function Contact() {
                 </Button>
                 <div className="text-center space-y-3">
                   <p className="text-sm text-muted-foreground">
-                    <span className="inline-block w-2 h-2 bg-green-500 rounded-full mr-2"></span>
-                    Contact form ready! Messages will be delivered to my inbox or email client.
+                    <span className="inline-block w-2 h-2 bg-blue-500 rounded-full mr-2"></span>
+                    Form will open your email client with a pre-filled message ready to send.
                   </p>
                   <div className="flex flex-col sm:flex-row gap-2">
                     <Button
