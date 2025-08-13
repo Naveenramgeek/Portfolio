@@ -101,22 +101,29 @@ export default function About() {
             </CardHeader>
             <CardContent className="prose prose-lg dark:prose-invert max-w-none">
               <p className="text-lg leading-relaxed text-muted-foreground">
-                Hey there! I'm <strong className="text-foreground">Naveen Vemula</strong>,
-                and I believe that the best technology is invisible—it just works beautifully.
-                My journey began with curiosity about how things work and evolved into a passion
-                for building systems that can handle millions of users while still feeling effortless to use.
+                Hey there! I'm{" "}
+                <strong className="text-foreground">Naveen Vemula</strong>, and
+                I believe that the best technology is invisible—it just works
+                beautifully. My journey began with curiosity about how things
+                work and evolved into a passion for building systems that can
+                handle millions of users while still feeling effortless to use.
               </p>
               <p className="text-lg leading-relaxed text-muted-foreground">
-                What excites me most? The moment when AI meets human creativity, when cloud architecture
-                becomes an art form, and when a hackathon idea transforms into reality. Whether I'm
-                optimizing microservices to handle 10M+ payloads or crafting the perfect user interface,
-                I'm driven by the impact technology can have on real people's lives. That's what led me
-                to win $2500 at HackMidwest 2024—not just for the code, but for solving problems that matter.
+                What excites me most? The moment when AI meets human creativity,
+                when cloud architecture becomes an art form, and when a
+                hackathon idea transforms into reality. Whether I'm optimizing
+                microservices to handle 10M+ payloads or crafting the perfect
+                user interface, I'm driven by the impact technology can have on
+                real people's lives. That's what led me to win $2500 at
+                HackMidwest 2024—not just for the code, but for solving problems
+                that matter.
               </p>
               <p className="text-lg leading-relaxed text-muted-foreground">
-                Currently pursuing my Master's at University of Central Missouri while working on projects
-                that push the boundaries of what's possible. I'm not just building for today—I'm building
-                for a future where technology enhances human potential in ways we're only beginning to imagine.
+                Currently pursuing my Master's at University of Central Missouri
+                while working on projects that push the boundaries of what's
+                possible. I'm not just building for today—I'm building for a
+                future where technology enhances human potential in ways we're
+                only beginning to imagine.
               </p>
             </CardContent>
           </Card>
@@ -227,19 +234,24 @@ export default function About() {
 
         {/* Values/Approach Section */}
         <section>
-          <h2 className="text-3xl font-bold text-center mb-12">What Drives Me</h2>
+          <h2 className="text-3xl font-bold text-center mb-12">
+            What Drives Me
+          </h2>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 max-w-5xl mx-auto">
             <Card className="text-center hover:shadow-lg transition-shadow">
               <CardHeader>
                 <div className="w-16 h-16 bg-primary-100 dark:bg-primary-900 rounded-full flex items-center justify-center mx-auto mb-4">
                   <span className="text-2xl">🧠</span>
                 </div>
-                <CardTitle className="text-xl">AI-Human Collaboration</CardTitle>
+                <CardTitle className="text-xl">
+                  AI-Human Collaboration
+                </CardTitle>
               </CardHeader>
               <CardContent>
                 <p className="text-muted-foreground">
-                  I believe AI shouldn't replace humans—it should amplify our creativity and solve problems
-                  we never thought possible. Building systems where technology enhances human potential.
+                  I believe AI shouldn't replace humans—it should amplify our
+                  creativity and solve problems we never thought possible.
+                  Building systems where technology enhances human potential.
                 </p>
               </CardContent>
             </Card>
@@ -253,8 +265,9 @@ export default function About() {
               </CardHeader>
               <CardContent>
                 <p className="text-muted-foreground">
-                  Whether it's handling millions of requests or optimizing for a single user interaction,
-                  every line of code should serve a greater purpose and create meaningful impact.
+                  Whether it's handling millions of requests or optimizing for a
+                  single user interaction, every line of code should serve a
+                  greater purpose and create meaningful impact.
                 </p>
               </CardContent>
             </Card>
@@ -268,8 +281,9 @@ export default function About() {
               </CardHeader>
               <CardContent>
                 <p className="text-muted-foreground">
-                  Programming is an art form. Like a craftsman perfecting their technique, I obsess over
-                  clean architecture, elegant solutions, and code that tells a story.
+                  Programming is an art form. Like a craftsman perfecting their
+                  technique, I obsess over clean architecture, elegant
+                  solutions, and code that tells a story.
                 </p>
               </CardContent>
             </Card>

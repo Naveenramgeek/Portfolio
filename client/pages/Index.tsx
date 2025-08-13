@@ -94,10 +94,11 @@ export default function Index() {
                   transition={{ delay: 0.4, duration: 0.8 }}
                   className="text-xl text-muted-foreground mb-8 max-w-2xl"
                 >
-                  I turn complex problems into elegant solutions. From building AI-powered applications
-                  that think smarter to architecting cloud systems that scale seamlessly, I craft digital
-                  experiences that make a real difference. Currently pursuing my MS while building the future,
-                  one line of code at a time.
+                  I turn complex problems into elegant solutions. From building
+                  AI-powered applications that think smarter to architecting
+                  cloud systems that scale seamlessly, I craft digital
+                  experiences that make a real difference. Currently pursuing my
+                  MS while building the future, one line of code at a time.
                 </motion.p>
               </div>
 
