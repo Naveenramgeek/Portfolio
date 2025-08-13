@@ -26,14 +26,15 @@ export default function Skills() {
             <CardContent>
               <div className="flex flex-wrap gap-2">
                 {[
-                  "Python",
                   "Java",
-                  "TypeScript",
-                  "JavaScript",
+                  "Python",
+                  "C",
+                  "C++",
                   "SQL",
                   "HTML",
                   "CSS",
-                  "C++",
+                  "TypeScript",
+                  "JavaScript",
                 ].map((skill) => (
                   <Badge key={skill} variant="secondary">
                     {skill}
@@ -46,22 +47,24 @@ export default function Skills() {
           <Card className="hover:shadow-lg transition-shadow">
             <CardHeader>
               <CardTitle className="text-xl text-primary flex items-center">
-                <span className="text-2xl mr-3">🛠️</span>
+                <span className="text-2xl mr-3">���️</span>
                 Frameworks & Libraries
               </CardTitle>
             </CardHeader>
             <CardContent>
               <div className="flex flex-wrap gap-2">
                 {[
-                  "React",
                   "Spring Boot",
-                  "Spring Security",
+                  "Kafka",
                   "Angular",
+                  "Node.js",
+                  "React",
+                  "ElasticSearch",
+                  "MongoDB",
+                  "MySQL",
                   "RxJS",
                   "NgRx",
-                  "Node.js",
-                  "FastAPI",
-                  "Flask",
+                  "Spring Security",
                 ].map((skill) => (
                   <Badge key={skill} variant="secondary">
                     {skill}
@@ -80,7 +83,7 @@ export default function Skills() {
             </CardHeader>
             <CardContent>
               <div className="flex flex-wrap gap-2">
-                {["GenAI", "AgenticAI", "OpenAI API", "TensorFlow", "PyTorch", "Scikit-learn", "Pandas", "NumPy", "LIME", "GradCAM"].map((skill) => (
+                {["TensorFlow", "OpenAI (DALL·E, GPT-4)", "Prompt Engineering", "GenAI", "AgenticAI", "LLM", "LIME", "GradCAM"].map((skill) => (
                   <Badge key={skill} variant="secondary">
                     {skill}
                   </Badge>
@@ -99,15 +102,18 @@ export default function Skills() {
             <CardContent>
               <div className="flex flex-wrap gap-2">
                 {[
-                  "AWS EC2",
-                  "S3",
-                  "Lambda",
-                  "Cognito",
-                  "CloudWatch",
-                  "VPC",
+                  "AWS (EC2, S3, Lambda, Cognito, CloudWatch, VPC)",
                   "Docker",
                   "Kubernetes",
                   "Jenkins",
+                  "Git",
+                  "Postman",
+                  "Swagger",
+                  "JIRA",
+                  "SonarQube",
+                  "Checkmarx",
+                  "Grafana",
+                  "Kibana",
                 ].map((skill) => (
                   <Badge key={skill} variant="secondary">
                     {skill}
