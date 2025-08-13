@@ -19,7 +19,7 @@ export default function Skills() {
           <Card className="hover:shadow-lg transition-shadow">
             <CardHeader>
               <CardTitle className="text-xl text-primary flex items-center">
-                <span className="text-2xl mr-3">💻</span>
+                <span className="text-2xl mr-3">❓</span>
                 Programming Languages
               </CardTitle>
             </CardHeader>
@@ -77,7 +77,7 @@ export default function Skills() {
           <Card className="hover:shadow-lg transition-shadow">
             <CardHeader>
               <CardTitle className="text-xl text-primary flex items-center">
-                <span className="text-2xl mr-3">🤖</span>
+                <span className="text-2xl mr-3">❓</span>
                 AI & ML Tools
               </CardTitle>
             </CardHeader>
@@ -95,7 +95,7 @@ export default function Skills() {
           <Card className="hover:shadow-lg transition-shadow">
             <CardHeader>
               <CardTitle className="text-xl text-primary flex items-center">
-                <span className="text-2xl mr-3">☁️</span>
+                <span className="text-2xl mr-3">❓</span>
                 DevOps & Cloud
               </CardTitle>
             </CardHeader>
@@ -126,7 +126,7 @@ export default function Skills() {
           <Card className="hover:shadow-lg transition-shadow">
             <CardHeader>
               <CardTitle className="text-xl text-primary flex items-center">
-                <span className="text-2xl mr-3">🗄️</span>
+                <span className="text-2xl mr-3">❓</span>
                 Databases
               </CardTitle>
             </CardHeader>
@@ -146,7 +146,7 @@ export default function Skills() {
           <Card className="hover:shadow-lg transition-shadow">
             <CardHeader>
               <CardTitle className="text-xl text-primary flex items-center">
-                <span className="text-2xl mr-3">🔒</span>
+                <span className="text-2xl mr-3">❓</span>
                 Security & Testing
               </CardTitle>
             </CardHeader>

@@ -1,5 +1,11 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import {
+  TrophyIcon,
+  AwardIcon,
+  GraduationCapIcon,
+  CodeIcon,
+} from "lucide-react";
 
 
 export default function Achievements() {
@@ -10,7 +16,8 @@ export default function Achievements() {
       description:
         "Won the Zoom Video SDK Challenge at HackMidwest 2024 for building 'Lets-Code', a real-time collaborative coding platform with integrated video/audio capabilities.",
       prize: "$2500 Prize",
-      emoji: "🏆",
+      icon: TrophyIcon,
+      color: "text-yellow-600",
       bgColor: "bg-yellow-100 dark:bg-yellow-900/20",
     },
     {
@@ -19,7 +26,8 @@ export default function Achievements() {
       description:
         "Successfully completed IBM's comprehensive certification program focusing on Generative AI applications in software development, demonstrating expertise in cutting-edge AI technologies.",
       prize: "Certified",
-      emoji: "🥇",
+      icon: AwardIcon,
+      color: "text-blue-600",
       bgColor: "bg-blue-100 dark:bg-blue-900/20",
     },
     {
@@ -28,7 +36,8 @@ export default function Achievements() {
       description:
         "Currently pursuing Master's degree in Computer Science with a focus on AI and software engineering, maintaining excellent academic performance.",
       prize: "3.8/4.0 GPA",
-      emoji: "🎓",
+      icon: GraduationCapIcon,
+      color: "text-green-600",
       bgColor: "bg-green-100 dark:bg-green-900/20",
     },
     {
@@ -37,7 +46,8 @@ export default function Achievements() {
       description:
         "Designed and implemented Spring Boot microservices handling over 10M payloads per month, reducing data retrieval latency by 38% and improving system efficiency by 35%.",
       prize: "10M+ Payloads",
-      emoji: "⚡",
+      icon: CodeIcon,
+      color: "text-purple-600",
       bgColor: "bg-purple-100 dark:bg-purple-900/20",
     },
   ];
@@ -60,8 +70,10 @@ export default function Achievements() {
             <Card key={index} className="hover:shadow-lg transition-shadow">
               <CardHeader>
                 <div className="flex items-start space-x-4">
-                  <div className={`p-3 rounded-full ${achievement.bgColor} flex items-center justify-center`}>
-                    <span className="text-2xl">{achievement.emoji}</span>
+                  <div className={`p-3 rounded-full ${achievement.bgColor}`}>
+                    <achievement.icon
+                      className={`h-6 w-6 ${achievement.color}`}
+                    />
                   </div>
                   <div className="flex-1">
                     <CardTitle className="text-xl mb-2">
