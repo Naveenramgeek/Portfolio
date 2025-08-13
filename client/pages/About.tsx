@@ -8,7 +8,7 @@ export default function About() {
       degree: "MS in Computer Science",
       school: "University of Central Missouri",
       period: "Aug 2024 - Dec 2025",
-      gpa: "3.7/4.0",
+      gpa: "3.8/4.0",
       location: "Missouri, USA",
     },
     {
@@ -92,17 +92,14 @@ export default function About() {
             <CardContent className="prose prose-lg dark:prose-invert max-w-none">
               <p className="text-lg leading-relaxed text-muted-foreground">
                 I am <strong className="text-foreground">Naveen Vemula</strong>,
-                a full-stack software engineer with expertise in building
-                AI-powered, cloud-hosted, enterprise-grade applications. My tech
-                stack spans Python, React, Java, Spring Boot, Angular, and AWS
-                services.
+                a full-stack developer with expertise in Spring Boot microservices architecture, Angular, Spring Security/JWT,
+                AI integration, and AWS. I have proven ability to solve complex technical challenges, winning hackathons, and delivering
+                high-performance, secure solutions under pressure.
               </p>
               <p className="text-lg leading-relaxed text-muted-foreground">
-                I'm passionate about solving real-world problems using scalable
-                microservices, intelligent UI/UX, and AI integrations. From
-                Python-based AI/ML solutions to modern React applications, I
-                bring both technical depth and innovation to every project, with
-                recognition in hackathons like HackMidwest 2024.
+                Ready to demonstrate deep technical expertise and problem-solving skills in interviews to secure challenging opportunities
+                in innovative, fast-paced, and collaborative teams. My experience spans from handling 10M+ payloads per month in
+                enterprise systems to winning $2500 at HackMidwest 2024.
               </p>
             </CardContent>
           </Card>

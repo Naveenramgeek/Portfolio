@@ -94,9 +94,9 @@ export default function Index() {
                   transition={{ delay: 0.4, duration: 0.8 }}
                   className="text-xl text-muted-foreground mb-8 max-w-2xl"
                 >
-                  AI-Powered Full-Stack Developer specializing in Python, React, Java, Spring
-                  Boot, Angular, and AWS. Building enterprise-grade applications
-                  with cutting-edge AI integrations.
+                  Full-stack developer with expertise in Spring Boot microservices architecture, Angular, Spring Security/JWT,
+                  AI integration, and AWS. Proven ability to solve complex technical challenges, winning hackathons, and delivering
+                  high-performance, secure solutions under pressure.
                 </motion.p>
               </div>
 
