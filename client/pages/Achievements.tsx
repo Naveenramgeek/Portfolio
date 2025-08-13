@@ -109,7 +109,9 @@ export default function Achievements() {
           </div>
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 max-w-4xl mx-auto">
             <div className="text-center">
-              <div className="text-4xl font-bold text-primary mb-2">��</div>
+              <div className="flex justify-center mb-2">
+                <TrophyIcon className="h-12 w-12 text-primary" />
+              </div>
               <div className="text-2xl font-bold text-foreground">1</div>
               <div className="text-sm text-muted-foreground">Hackathon Win</div>
             </div>
