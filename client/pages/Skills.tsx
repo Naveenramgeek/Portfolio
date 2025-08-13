@@ -47,7 +47,7 @@ export default function Skills() {
           <Card className="hover:shadow-lg transition-shadow">
             <CardHeader>
               <CardTitle className="text-xl text-primary flex items-center">
-                <span className="text-2xl mr-3">���️</span>
+                <span className="text-2xl mr-3">❓</span>
                 Frameworks & Libraries
               </CardTitle>
             </CardHeader>
