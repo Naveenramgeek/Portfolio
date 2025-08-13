@@ -94,11 +94,10 @@ export default function Index() {
                   transition={{ delay: 0.4, duration: 0.8 }}
                   className="text-xl text-muted-foreground mb-8 max-w-2xl"
                 >
-                  Full-stack developer with expertise in Spring Boot
-                  microservices architecture, Angular, Spring Security/JWT, AI
-                  integration, and AWS. Proven ability to solve complex
-                  technical challenges, winning hackathons, and delivering
-                  high-performance, secure solutions under pressure.
+                  I turn complex problems into elegant solutions. From building AI-powered applications
+                  that think smarter to architecting cloud systems that scale seamlessly, I craft digital
+                  experiences that make a real difference. Currently pursuing my MS while building the future,
+                  one line of code at a time.
                 </motion.p>
               </div>
 

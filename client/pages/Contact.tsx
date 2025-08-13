@@ -135,8 +135,9 @@ export default function Contact() {
             Get In Touch
           </h1>
           <p className="text-xl text-muted-foreground max-w-3xl mx-auto">
-            Let's discuss how we can work together to build something amazing.
-            I'm always excited to collaborate on innovative projects.
+            Have an idea that could change everything? A technical challenge that seems impossible?
+            Or just want to chat about the future of AI and development? I'd love to hear from you.
+            The best projects start with great conversations.
           </p>
         </div>
 
@@ -342,16 +343,15 @@ export default function Contact() {
 
             <Card className="hover:shadow-lg transition-shadow bg-primary-50 dark:bg-primary-950/50">
               <CardContent className="p-6">
-                <h3 className="text-lg font-semibold text-foreground mb-3">
-                  Let's Build Something Amazing Together
-                </h3>
-                <p className="text-muted-foreground text-sm leading-relaxed">
-                  I'm passionate about collaborating on innovative projects that
-                  leverage AI, cloud technologies, and modern development
-                  practices. Whether you're looking for a full-stack developer,
-                  AI integration expert, or cloud architect, I'd love to hear
-                  about your ideas.
-                </p>
+              <h3 className="text-lg font-semibold text-foreground mb-3">
+                Ready to Turn Ideas Into Reality?
+              </h3>
+              <p className="text-muted-foreground text-sm leading-relaxed">
+                I thrive on projects that challenge conventional thinking. Whether you're envisioning
+                an AI-powered solution that doesn't exist yet, need to scale a system beyond its limits,
+                or want to create user experiences that feel like magic—let's collaborate and build
+                something that matters.
+              </p>
               </CardContent>
             </Card>
           </div>
