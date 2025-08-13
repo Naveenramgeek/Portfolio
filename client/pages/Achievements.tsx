@@ -5,8 +5,6 @@ import {
   AwardIcon,
   GraduationCapIcon,
   CodeIcon,
-  DollarSignIcon,
-  WrenchIcon,
 } from "lucide-react";
 
 export default function Achievements() {
@@ -109,30 +107,22 @@ export default function Achievements() {
           </div>
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 max-w-4xl mx-auto">
             <div className="text-center">
-              <div className="flex justify-center mb-2">
-                <TrophyIcon className="h-12 w-12 text-primary" />
-              </div>
+              <div className="text-4xl font-bold text-primary mb-2">🏆</div>
               <div className="text-2xl font-bold text-foreground">1</div>
               <div className="text-sm text-muted-foreground">Hackathon Win</div>
             </div>
             <div className="text-center">
-              <div className="flex justify-center mb-2">
-                <DollarSignIcon className="h-12 w-12 text-primary" />
-              </div>
+              <div className="text-4xl font-bold text-primary mb-2">💰</div>
               <div className="text-2xl font-bold text-foreground">$2.5K</div>
               <div className="text-sm text-muted-foreground">Prize Money</div>
             </div>
             <div className="text-center">
-              <div className="flex justify-center mb-2">
-                <WrenchIcon className="h-12 w-12 text-primary" />
-              </div>
+              <div className="text-4xl font-bold text-primary mb-2">📱</div>
               <div className="text-2xl font-bold text-foreground">4+</div>
               <div className="text-sm text-muted-foreground">Apps Built</div>
             </div>
             <div className="text-center">
-              <div className="flex justify-center mb-2">
-                <GraduationCapIcon className="h-12 w-12 text-primary" />
-              </div>
+              <div className="text-4xl font-bold text-primary mb-2">🎓</div>
               <div className="text-2xl font-bold text-foreground">3.8</div>
               <div className="text-sm text-muted-foreground">GPA</div>
             </div>
