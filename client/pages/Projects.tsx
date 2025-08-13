@@ -8,8 +8,8 @@ export default function Projects() {
     {
       title: "AI-Powered Social Media Ad Copy Generator",
       description:
-        "Full-stack app generating brand-specific ads using AI. Integrated Firebase for auth, OpenAI for ad generation, deployed via AWS EC2 and S3.",
-      tech: ["Angular", "Spring Boot", "MongoDB", "OpenAI", "Firebase", "AWS"],
+        "Engineered an AI-powered ad copy generator using Spring Boot, Angular, GPT-4, and gpt-image-1 to deliver personalized ad visuals 5x faster than manual creation. Integrated Firebase for authentication, and deployed the app using AWS EC2 and S3. Applied advanced prompt engineering and designed a seamless user experience UI.",
+      tech: ["Spring Boot", "Angular", "GPT-4", "gpt-image-1", "Firebase", "AWS EC2", "S3", "Prompt Engineering"],
       githubUrl: "https://github.com/Naveenramgeek/ai-ad-generator",
       featured: true,
     },
@@ -24,8 +24,8 @@ export default function Projects() {
     {
       title: "Ride-Matching Web Application",
       description:
-        "Matching system where users can post or accept rides. Includes secure JWT authentication and cloud deployment.",
-      tech: ["Spring Boot", "Angular", "MongoDB", "AWS EC2", "Cognito"],
+        "Developed a full-stack ride-sharing app using Spring Boot, Angular, and MongoDB, allowing users to post and select rides by preference, and get email notifications. Deployed backend and database on AWS EC2, hosted frontend on S3, and integrated Cognito (JWT) with CloudWatch monitoring. Tested with 1K+ ride postings during beta.",
+      tech: ["Spring Boot", "Angular", "MongoDB", "AWS EC2", "S3", "Cognito", "JWT", "CloudWatch"],
       githubUrl: "https://github.com/Naveenramgeek/ride-app-client-server",
       featured: true,
     },

@@ -279,10 +279,13 @@ export default function Contact() {
                     <PhoneIcon className="h-5 w-5 text-primary" />
                   </div>
                   <div>
-                    <p className="font-medium text-foreground">Availability</p>
-                    <p className="text-muted-foreground">
-                      Open to opportunities
-                    </p>
+                    <p className="font-medium text-foreground">Phone</p>
+                    <a
+                      href="tel:+19134135961"
+                      className="text-muted-foreground hover:text-primary transition-colors"
+                    >
+                      +1 (913) 413-5961
+                    </a>
                   </div>
                 </div>
               </CardContent>
@@ -324,7 +327,7 @@ export default function Contact() {
                   </a>
                 </Button>
                 <Button className="w-full justify-start" asChild>
-                  <a href="/resume.pdf" download>
+                  <a href="https://cdn.builder.io/o/assets%2Fa8a5781317f94848a46c886177848c18%2F8e078fba5cc1439c8c36376aaafb3a82?alt=media&token=95020fa1-9f19-4f48-bbad-a3b0e6a839cd&apiKey=a8a5781317f94848a46c886177848c18" download="Naveen_Resume.pdf">
                     <DownloadIcon className="mr-3 h-5 w-5" />
                     Download Resume
                   </a>
