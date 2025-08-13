@@ -82,7 +82,7 @@ export default function Navigation({
             </Button>
 
             <Button asChild>
-              <a href="/resume.pdf" download className="ml-2">
+              <a href="https://cdn.builder.io/o/assets%2Fa8a5781317f94848a46c886177848c18%2F8e078fba5cc1439c8c36376aaafb3a82?alt=media&token=95020fa1-9f19-4f48-bbad-a3b0e6a839cd&apiKey=a8a5781317f94848a46c886177848c18" download="Naveen_Resume.pdf" className="ml-2">
                 Download Resume
               </a>
             </Button>
@@ -131,7 +131,7 @@ export default function Navigation({
               ))}
               <div className="px-3 py-2">
                 <Button asChild className="w-full">
-                  <a href="/resume.pdf" download>
+                  <a href="https://cdn.builder.io/o/assets%2Fa8a5781317f94848a46c886177848c18%2F8e078fba5cc1439c8c36376aaafb3a82?alt=media&token=95020fa1-9f19-4f48-bbad-a3b0e6a839cd&apiKey=a8a5781317f94848a46c886177848c18" download="Naveen_Resume.pdf">
                     Download Resume
                   </a>
                 </Button>

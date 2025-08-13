@@ -107,7 +107,7 @@ export default function Index() {
                 className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start mb-8"
               >
                 <Button size="lg" asChild>
-                  <a href="/resume.pdf" download>
+                  <a href="https://cdn.builder.io/o/assets%2Fa8a5781317f94848a46c886177848c18%2F8e078fba5cc1439c8c36376aaafb3a82?alt=media&token=95020fa1-9f19-4f48-bbad-a3b0e6a839cd&apiKey=a8a5781317f94848a46c886177848c18" download="Naveen_Resume.pdf">
                     View Resume
                     <ArrowRightIcon className="ml-2 h-4 w-4" />
                   </a>
@@ -295,7 +295,7 @@ export default function Index() {
               </div>
             </div>
             <div>
-              <div className="text-3xl font-bold text-primary mb-2">3.7</div>
+              <div className="text-3xl font-bold text-primary mb-2">3.8</div>
               <div className="text-sm text-muted-foreground">MS GPA</div>
             </div>
           </div>
