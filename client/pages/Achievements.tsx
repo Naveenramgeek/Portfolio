@@ -7,7 +7,6 @@ import {
   CodeIcon,
 } from "lucide-react";
 
-
 export default function Achievements() {
   const achievements = [
     {

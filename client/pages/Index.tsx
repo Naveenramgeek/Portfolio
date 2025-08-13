@@ -94,8 +94,10 @@ export default function Index() {
                   transition={{ delay: 0.4, duration: 0.8 }}
                   className="text-xl text-muted-foreground mb-8 max-w-2xl"
                 >
-                  Full-stack developer with expertise in Spring Boot microservices architecture, Angular, Spring Security/JWT,
-                  AI integration, and AWS. Proven ability to solve complex technical challenges, winning hackathons, and delivering
+                  Full-stack developer with expertise in Spring Boot
+                  microservices architecture, Angular, Spring Security/JWT, AI
+                  integration, and AWS. Proven ability to solve complex
+                  technical challenges, winning hackathons, and delivering
                   high-performance, secure solutions under pressure.
                 </motion.p>
               </div>
@@ -107,7 +109,10 @@ export default function Index() {
                 className="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start mb-8"
               >
                 <Button size="lg" asChild>
-                  <a href="https://cdn.builder.io/o/assets%2Fa8a5781317f94848a46c886177848c18%2F8e078fba5cc1439c8c36376aaafb3a82?alt=media&token=95020fa1-9f19-4f48-bbad-a3b0e6a839cd&apiKey=a8a5781317f94848a46c886177848c18" download="Naveen_Resume.pdf">
+                  <a
+                    href="https://cdn.builder.io/o/assets%2Fa8a5781317f94848a46c886177848c18%2F8e078fba5cc1439c8c36376aaafb3a82?alt=media&token=95020fa1-9f19-4f48-bbad-a3b0e6a839cd&apiKey=a8a5781317f94848a46c886177848c18"
+                    download="Naveen_Resume.pdf"
+                  >
                     View Resume
                     <ArrowRightIcon className="ml-2 h-4 w-4" />
                   </a>

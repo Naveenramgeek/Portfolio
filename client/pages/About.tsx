@@ -63,7 +63,15 @@ export default function About() {
       title: "Software Development Intern",
       company: "Software AG",
       period: "Jan 2022 - May 2022",
-      technologies: ["Angular", "RxJS", "Spring WebFlux", "JUnit", "Cypress", "Chrome DevTools", "IntelliJ"],
+      technologies: [
+        "Angular",
+        "RxJS",
+        "Spring WebFlux",
+        "JUnit",
+        "Cypress",
+        "Chrome DevTools",
+        "IntelliJ",
+      ],
       description:
         "Enhanced front-end stability by fixing 30+ UI defects and improving Angular component architecture, streamlining debugging with Chrome DevTools and IntelliJ, cutting bug resolution time by 30%. Developed robust back-end services using Spring WebFlux for real-time data streaming and implemented automated testing with JUnit and Cypress.",
     },
@@ -94,14 +102,18 @@ export default function About() {
             <CardContent className="prose prose-lg dark:prose-invert max-w-none">
               <p className="text-lg leading-relaxed text-muted-foreground">
                 I am <strong className="text-foreground">Naveen Vemula</strong>,
-                a full-stack developer with expertise in Spring Boot microservices architecture, Angular, Spring Security/JWT,
-                AI integration, and AWS. I have proven ability to solve complex technical challenges, winning hackathons, and delivering
+                a full-stack developer with expertise in Spring Boot
+                microservices architecture, Angular, Spring Security/JWT, AI
+                integration, and AWS. I have proven ability to solve complex
+                technical challenges, winning hackathons, and delivering
                 high-performance, secure solutions under pressure.
               </p>
               <p className="text-lg leading-relaxed text-muted-foreground">
-                Ready to demonstrate deep technical expertise and problem-solving skills in interviews to secure challenging opportunities
-                in innovative, fast-paced, and collaborative teams. My experience spans from handling 10M+ payloads per month in
-                enterprise systems to winning $2500 at HackMidwest 2024.
+                Ready to demonstrate deep technical expertise and
+                problem-solving skills in interviews to secure challenging
+                opportunities in innovative, fast-paced, and collaborative
+                teams. My experience spans from handling 10M+ payloads per month
+                in enterprise systems to winning $2500 at HackMidwest 2024.
               </p>
             </CardContent>
           </Card>

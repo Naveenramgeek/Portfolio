@@ -83,7 +83,16 @@ export default function Skills() {
             </CardHeader>
             <CardContent>
               <div className="flex flex-wrap gap-2">
-                {["TensorFlow", "OpenAI (DALL·E, GPT-4)", "Prompt Engineering", "GenAI", "AgenticAI", "LLM", "LIME", "GradCAM"].map((skill) => (
+                {[
+                  "TensorFlow",
+                  "OpenAI (DALL·E, GPT-4)",
+                  "Prompt Engineering",
+                  "GenAI",
+                  "AgenticAI",
+                  "LLM",
+                  "LIME",
+                  "GradCAM",
+                ].map((skill) => (
                   <Badge key={skill} variant="secondary">
                     {skill}
                   </Badge>

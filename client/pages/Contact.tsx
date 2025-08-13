@@ -27,10 +27,8 @@ export default function Contact() {
     message: "",
   });
 
-
-
   const handleInputChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) => {
     const { name, value } = e.target;
     setFormData((prev) => ({
@@ -46,7 +44,12 @@ export default function Contact() {
     if (isLoading) return;
 
     // Validate required fields
-    if (!formData.firstName.trim() || !formData.lastName.trim() || !formData.email.trim() || !formData.message.trim()) {
+    if (
+      !formData.firstName.trim() ||
+      !formData.lastName.trim() ||
+      !formData.email.trim() ||
+      !formData.message.trim()
+    ) {
       toast({
         title: "Please fill all required fields",
         description: "Name, email, and message are required.",
@@ -58,29 +61,36 @@ export default function Contact() {
     setIsLoading(true);
 
     // Add delay to prevent rapid submissions
-    await new Promise(resolve => setTimeout(resolve, 300));
+    await new Promise((resolve) => setTimeout(resolve, 300));
 
     try {
       // Use FormSubmit for automatic email delivery
       const formDataToSend = new FormData();
-      formDataToSend.append('name', `${formData.firstName} ${formData.lastName}`.trim());
-      formDataToSend.append('email', formData.email);
-      formDataToSend.append('subject', formData.subject);
-      formDataToSend.append('message', formData.message);
-      formDataToSend.append('_next', window.location.href); // Redirect back to same page
-      formDataToSend.append('_captcha', 'false'); // Disable captcha for smooth UX
+      formDataToSend.append(
+        "name",
+        `${formData.firstName} ${formData.lastName}`.trim(),
+      );
+      formDataToSend.append("email", formData.email);
+      formDataToSend.append("subject", formData.subject);
+      formDataToSend.append("message", formData.message);
+      formDataToSend.append("_next", window.location.href); // Redirect back to same page
+      formDataToSend.append("_captcha", "false"); // Disable captcha for smooth UX
 
       // Send to FormSubmit endpoint
-      const response = await fetch('https://formsubmit.co/naveenvemula2487@gmail.com', {
-        method: 'POST',
-        body: formDataToSend
-      });
+      const response = await fetch(
+        "https://formsubmit.co/naveenvemula2487@gmail.com",
+        {
+          method: "POST",
+          body: formDataToSend,
+        },
+      );
 
       if (response.ok) {
         // Show success message
         toast({
           title: "Message sent successfully!",
-          description: "Thank you for your message. I'll get back to you within 24 hours.",
+          description:
+            "Thank you for your message. I'll get back to you within 24 hours.",
         });
 
         // Reset form
@@ -94,14 +104,14 @@ export default function Contact() {
       } else {
         throw new Error(`HTTP error! status: ${response.status}`);
       }
-
     } catch (error) {
       console.error("Email send error:", error);
 
       // Show error message but still reset form
       toast({
         title: "Failed to send message",
-        description: "Please try again or contact me directly at naveenvemula2487@gmail.com",
+        description:
+          "Please try again or contact me directly at naveenvemula2487@gmail.com",
         variant: "destructive",
       });
 
@@ -138,15 +148,12 @@ export default function Contact() {
                 Send a Message
               </CardTitle>
               <p className="text-muted-foreground">
-                I'm currently available for new opportunities and exciting collaborations.
+                I'm currently available for new opportunities and exciting
+                collaborations.
               </p>
             </CardHeader>
             <CardContent>
-              <form
-                onSubmit={handleSubmit}
-                className="space-y-6"
-                noValidate
-              >
+              <form onSubmit={handleSubmit} className="space-y-6" noValidate>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   <div className="space-y-2">
                     <Label htmlFor="firstName">First Name</Label>
@@ -171,7 +178,6 @@ export default function Contact() {
                       required
                       disabled={isLoading}
                     />
-
                   </div>
                 </div>
                 <div className="space-y-2">
@@ -211,13 +217,8 @@ export default function Contact() {
                     required
                     disabled={isLoading}
                   />
-
                 </div>
-                <Button
-                  type="submit"
-                  className="w-full"
-                  disabled={isLoading}
-                >
+                <Button type="submit" className="w-full" disabled={isLoading}>
                   {isLoading ? (
                     <>
                       <Loader2Icon className="mr-2 h-4 w-4 animate-spin" />
@@ -233,7 +234,8 @@ export default function Contact() {
                 <div className="text-center">
                   <p className="text-sm text-muted-foreground">
                     <span className="inline-block w-2 h-2 bg-green-500 rounded-full mr-2"></span>
-                    Your message will be sent automatically to my inbox. No additional steps required!
+                    Your message will be sent automatically to my inbox. No
+                    additional steps required!
                   </p>
                 </div>
               </form>
@@ -327,7 +329,10 @@ export default function Contact() {
                   </a>
                 </Button>
                 <Button className="w-full justify-start" asChild>
-                  <a href="https://cdn.builder.io/o/assets%2Fa8a5781317f94848a46c886177848c18%2F8e078fba5cc1439c8c36376aaafb3a82?alt=media&token=95020fa1-9f19-4f48-bbad-a3b0e6a839cd&apiKey=a8a5781317f94848a46c886177848c18" download="Naveen_Resume.pdf">
+                  <a
+                    href="https://cdn.builder.io/o/assets%2Fa8a5781317f94848a46c886177848c18%2F8e078fba5cc1439c8c36376aaafb3a82?alt=media&token=95020fa1-9f19-4f48-bbad-a3b0e6a839cd&apiKey=a8a5781317f94848a46c886177848c18"
+                    download="Naveen_Resume.pdf"
+                  >
                     <DownloadIcon className="mr-3 h-5 w-5" />
                     Download Resume
                   </a>
@@ -351,8 +356,6 @@ export default function Contact() {
             </Card>
           </div>
         </div>
-
-
       </div>
     </div>
   );

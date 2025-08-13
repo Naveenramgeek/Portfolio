@@ -9,7 +9,16 @@ export default function Projects() {
       title: "AI-Powered Social Media Ad Copy Generator",
       description:
         "Engineered an AI-powered ad copy generator using Spring Boot, Angular, GPT-4, and gpt-image-1 to deliver personalized ad visuals 5x faster than manual creation. Integrated Firebase for authentication, and deployed the app using AWS EC2 and S3. Applied advanced prompt engineering and designed a seamless user experience UI.",
-      tech: ["Spring Boot", "Angular", "GPT-4", "gpt-image-1", "Firebase", "AWS EC2", "S3", "Prompt Engineering"],
+      tech: [
+        "Spring Boot",
+        "Angular",
+        "GPT-4",
+        "gpt-image-1",
+        "Firebase",
+        "AWS EC2",
+        "S3",
+        "Prompt Engineering",
+      ],
       githubUrl: "https://github.com/Naveenramgeek/ai-ad-generator",
       featured: true,
     },
@@ -25,7 +34,16 @@ export default function Projects() {
       title: "Ride-Matching Web Application",
       description:
         "Developed a full-stack ride-sharing app using Spring Boot, Angular, and MongoDB, allowing users to post and select rides by preference, and get email notifications. Deployed backend and database on AWS EC2, hosted frontend on S3, and integrated Cognito (JWT) with CloudWatch monitoring. Tested with 1K+ ride postings during beta.",
-      tech: ["Spring Boot", "Angular", "MongoDB", "AWS EC2", "S3", "Cognito", "JWT", "CloudWatch"],
+      tech: [
+        "Spring Boot",
+        "Angular",
+        "MongoDB",
+        "AWS EC2",
+        "S3",
+        "Cognito",
+        "JWT",
+        "CloudWatch",
+      ],
       githubUrl: "https://github.com/Naveenramgeek/ride-app-client-server",
       featured: true,
     },
@@ -86,8 +104,17 @@ export default function Projects() {
                     ))}
                   </div>
                   <div className="flex gap-2">
-                    <Button variant="outline" size="sm" className="w-full" asChild>
-                      <a href={project.githubUrl} target="_blank" rel="noopener noreferrer">
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      className="w-full"
+                      asChild
+                    >
+                      <a
+                        href={project.githubUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                      >
                         <GithubIcon className="mr-2 h-3 w-3" />
                         View Repository
                       </a>
