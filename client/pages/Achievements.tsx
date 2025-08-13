@@ -5,6 +5,8 @@ import {
   AwardIcon,
   GraduationCapIcon,
   CodeIcon,
+  DollarSignIcon,
+  WrenchIcon,
 } from "lucide-react";
 
 export default function Achievements() {
@@ -112,17 +114,23 @@ export default function Achievements() {
               <div className="text-sm text-muted-foreground">Hackathon Win</div>
             </div>
             <div className="text-center">
-              <div className="text-4xl font-bold text-primary mb-2">💰</div>
+              <div className="flex justify-center mb-2">
+                <DollarSignIcon className="h-12 w-12 text-primary" />
+              </div>
               <div className="text-2xl font-bold text-foreground">$2.5K</div>
               <div className="text-sm text-muted-foreground">Prize Money</div>
             </div>
             <div className="text-center">
-              <div className="text-4xl font-bold text-primary mb-2">📱</div>
+              <div className="flex justify-center mb-2">
+                <WrenchIcon className="h-12 w-12 text-primary" />
+              </div>
               <div className="text-2xl font-bold text-foreground">4+</div>
               <div className="text-sm text-muted-foreground">Apps Built</div>
             </div>
             <div className="text-center">
-              <div className="text-4xl font-bold text-primary mb-2">🎓</div>
+              <div className="flex justify-center mb-2">
+                <GraduationCapIcon className="h-12 w-12 text-primary" />
+              </div>
               <div className="text-2xl font-bold text-foreground">3.8</div>
               <div className="text-sm text-muted-foreground">GPA</div>
             </div>
